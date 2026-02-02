@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>❤️</title>
+
+<style>
+*{box-sizing:border-box;font-family:"Segoe UI",sans-serif}
+body{
+  margin:0;
+  height:100vh;
+  background:linear-gradient(135deg,#ff9acb,#ff6fae);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+.card{
+  background:#ffe3f0;
+  padding:30px 40px;
+  border-radius:25px;
+  box-shadow:0 20px 40px rgba(0,0,0,.2);
+  text-align:center;
+  width:320px;
+  position:relative;
+}
+
+button{
+  border:none;
+  padding:12px 25px;
+  margin:15px;
+  border-radius:20px;
+  font-size:18px;
+  cursor:pointer;
+}
+.yes{background:#ff5fa2;color:white}
+.no{background:#ddd}
+
+.questionEmoji{
+  position:absolute;
+  font-size:26px;
+  animation:floatUp 3s linear forwards;
+}
+
+@keyframes floatUp{
+  from{opacity:1;transform:translateY(0)}
+  to{opacity:0;transform:translateY(-120px)}
+}
+
+/* HACK */
+#hack{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:black;
+  color:#0f0;
+  font-family:monospace;
+  padding:40px;
+  z-index:10;
+}
+#hackTop{font-size:18px}
+#bar{
+  margin-top:20px;
+  height:6px;
+  background:#0f0;
+  width:0%;
+}
+
+/* erreurs hack */
+.hackError{
+  position:fixed;
+  color:#ff2b2b;
+  font-size:12px;
+  font-family:monospace;
+  background:rgba(0,0,0,.75);
+  padding:6px 10px;
+  border-radius:6px;
+  box-shadow:0 0 10px red;
+  animation:errorBlink .25s infinite alternate,errorShake .15s infinite;
+  z-index:20;
+}
+@keyframes errorBlink{from{opacity:1}to{opacity:.3}}
+@keyframes errorShake{
+  0%{transform:translate(0,0)}
+  25%{transform:translate(2px,-2px)}
+  50%{transform:translate(-2px,2px)}
+  75%{transform:translate(2px,2px)}
+  100%{transform:translate(0,0)}
+}
+
+/* enveloppe */
+#envelope{
+  display:none;
+  width:120px;
+  height:80px;
+  background:#fff;
+  position:relative;
+  border-radius:10px;
+  cursor:pointer;
+}
+#envelope::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(135deg,transparent 50%,#f3f3f3 50%);
+  border-radius:10px;
+}
+
+/* lettre */
+#letter{
+  display:none;
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+#letterCard{
+  background:#ffe3f0;
+  padding:30px 40px;
+  border-radius:25px;
+  box-shadow:0 20px 40px rgba(0,0,0,.2);
+  text-align:center;
+  position:relative;
+}
+#finalText{
+  font-size:36px;
+  color:#ff4f9a;
+}
+#subText{
+  margin-top:15px;
+  font-size:20px;
+  color:#ff4f9a;
+}
+
+.heart{
+  position:fixed;
+  font-size:24px;
+  animation:heartFloat 3s linear forwards;
+}
+@keyframes heartFloat{
+  from{opacity:1;transform:translateY(0)}
+  to{opacity:0;transform:translateY(-150px)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="question">
+  <h2 id="qText"></h2>
+  <button class="yes" onclick="yes()">Oui</button>
+  <button class="no">Non</button>
+</div>
+
+<div id="hack">
+  <div id="hackTop"></div>
+  <div id="bar"></div>
+</div>
+
+<div id="envelope" onclick="openLetter()"></div>
+
+<div id="letter">
+  <div id="letterCard">
+    <div id="finalText"></div>
+    <div id="subText"></div>
+  </div>
+</div>
+
+<script>
+const questions=[
+  "Tu m’aimes ? ❤️",
+  "Tu veux être toujours avec moi ? 💍",
+  "Veux-tu être ma future femme ? 👰"
+];
+let q=0;
+
+const qText=document.getElementById("qText");
+const question=document.getElementById("question");
+qText.innerText=questions[q];
+
+function spawnQuestionEmoji(){
+  const e=document.createElement("div");
+  e.className="questionEmoji";
+  e.innerText=questions[q].match(/[\p{Emoji}]/u)[0];
+  e.style.left=Math.random()*80+"%";
+  e.style.top=Math.random()*60+"%";
+  question.appendChild(e);
+  setTimeout(()=>e.remove(),3000);
+}
+
+function yes(){
+  const i=setInterval(spawnQuestionEmoji,120);
+  setTimeout(()=>{
+    clearInterval(i);
+    q++;
+    if(q<questions.length){
+      qText.innerText=questions[q];
+    }else{
+      question.style.display="none";
+      startHack();
+    }
+  },800);
+}
+
+/* hack */
+const hack=document.getElementById("hack");
+const hackTop=document.getElementById("hackTop");
+const bar=document.getElementById("bar");
+const hackMsgs=[
+  "Connexion au serveur...",
+  "Accès aux données...",
+  "Injection du payload...",
+  "Désactivation sécurité...",
+  "Contrôle total acquis"
+];
+let h=0;
+
+const errorMessages=[
+  "ERROR 0x000FF","ACCESS DENIED","MEMORY CORRUPTED",
+  "SYSTEM FAILURE","DATA BREACH","KERNEL PANIC"
+];
+let hackErrorInterval;
+
+function spawnHackError(){
+  const e=document.createElement("div");
+  e.className="hackError";
+  e.innerText=errorMessages[Math.floor(Math.random()*errorMessages.length)];
+  e.style.left=Math.random()*100+"vw";
+  e.style.top=Math.random()*100+"vh";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),1500);
+}
+
+function startHack(){
+  hack.style.display="block";
+  hackErrorInterval=setInterval(spawnHackError,120);
+
+  const i=setInterval(()=>{
+    hackTop.innerText=hackMsgs[h];
+    bar.style.width=((h+1)/hackMsgs.length)*100+"%";
+    h++;
+    if(h>=hackMsgs.length){
+      clearInterval(i);
+      clearInterval(hackErrorInterval);
+      document.querySelectorAll(".hackError").forEach(e=>e.remove());
+      setTimeout(()=>{
+        hack.style.display="none";
+        document.getElementById("envelope").style.display="block";
+      },800);
+    }
+  },900);
+}
+
+/* lettre */
+function openLetter(){
+  document.getElementById("envelope").style.display="none";
+  document.getElementById("letter").style.display="flex";
+  typeText("Je t’aime ❤️",document.getElementById("finalText"),()=>{
+    spawnHearts();
+    document.getElementById("subText").innerText="Joyeuse Saint Chaimaa Beauté 💖";
+  });
+}
+
+function typeText(text,el,cb){
+  let i=0;
+  const t=setInterval(()=>{
+    el.innerText+=text[i];
+    i++;
+    if(i>=text.length){
+      clearInterval(t);
+      cb();
+    }
+  },120);
+}
+
+function spawnHearts(){
+  const i=setInterval(()=>{
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerText="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.top="100vh";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),3000);
+  },150);
+}
+</script>
+
+</body>
+</html>
