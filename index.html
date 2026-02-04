@@ -21,13 +21,13 @@ body{
 /* ===== TITRE ===== */
 #title{
   position:fixed;
-  top:20px;
+  top:60px;                 /* ⬇️ moins haut */
   left:50%;
   transform:translateX(-50%);
-  font-size:34px;
+  font-size:32px;
   font-weight:bold;
-  color:white;
-  text-shadow:0 4px 12px rgba(0,0,0,.3);
+  color:red;
+  text-decoration:underline;
   z-index:20;
 }
 
@@ -151,7 +151,33 @@ button{
   flex-direction:column;
 }
 
+/* ===== ENVELOPPE OUVERTURE ===== */
+.envelopeOpen{
+  position:relative;
+  width:220px;
+  height:140px;
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+  cursor:pointer;
+  overflow:hidden;
+}
+.flap{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#fff;
+  transform-origin:top;
+  animation:openFlap 1.2s forwards;
+}
+@keyframes openFlap{
+  to{transform:rotateX(160deg);opacity:0}
+}
+
 .finalCard{
+  margin-top:30px;
   background:#ffe4ef;
   border-radius:28px;
   padding:35px 25px;
@@ -214,7 +240,9 @@ button{
 </div>
 
 <div id="final">
-  <img src="IMG_5431.jpeg" class="envelope" onclick="openFinal()">
+  <div class="envelopeOpen" onclick="openFinal()">
+    <div class="flap"></div>
+  </div>
 </div>
 
 <script>
@@ -273,7 +301,7 @@ function spawnHackChaos(){
 }
 
 function startHack(){
-  document.getElementById("title").style.display="none"; // 👈 le titre disparaît ici
+  title.style.display="none";
   hack.style.display="block";
   chaos=setInterval(spawnHackChaos,70);
 
@@ -295,6 +323,9 @@ function startHack(){
 
 function openFinal(){
   final.innerHTML=`
+    <div class="envelopeOpen">
+      <div class="flap"></div>
+    </div>
     <div class="finalCard">
       <h1 id="typeText"></h1>
       <p id="subText">Joyeuse Saint Chaimaa Beauté 💖</p>
