@@ -18,6 +18,30 @@ body{
   transition:background 1s ease;
 }
 
+/* ===== TITRES ===== */
+#topTitle{
+  position:fixed;
+  top:40px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:28px;
+  font-weight:bold;
+  color:#ff2f7d;
+  z-index:20;
+}
+
+#title{
+  position:fixed;
+  top:120px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:32px;
+  font-weight:900;
+  color:#c00000;
+  text-decoration:underline;
+  z-index:20;
+}
+
 /* ===== CARTES ===== */
 .card{
   display:none;
@@ -92,7 +116,6 @@ button{
   height:14px;
   background:#330000;
   border-radius:10px;
-  margin-top:15px;
   overflow:hidden;
 }
 .bar{
@@ -100,16 +123,6 @@ button{
   width:0%;
   background:red;
   transition:width .7s linear;
-}
-.hackProgressText{
-  margin-top:10px;
-  font-size:13px;
-  font-weight:bold;
-  animation:flash .6s infinite;
-}
-@keyframes flash{
-  0%,100%{opacity:1;}
-  50%{opacity:0;}
 }
 
 /* ===== CHAOS EXTÉRIEUR ===== */
@@ -135,29 +148,47 @@ button{
   justify-content:center;
   align-items:center;
   z-index:10;
-  flex-direction:column;
 }
 
-.finalCard{
+/* ===== FEUILLE ===== */
+.paper{
+  position:absolute;
+  width:200px;
+  height:140px;
   background:#ffe4ef;
-  border-radius:28px;
-  padding:35px 25px;
-  max-width:420px;
+  top:40px;
+  left:50%;
+  transform:translate(-50%,60px);
+  border-radius:10px;
+  opacity:0;
+  box-shadow:0 10px 25px rgba(0,0,0,.25);
+  padding:18px;
   text-align:center;
-  box-shadow:0 20px 40px rgba(0,0,0,.25);
-  animation:zoomIn 1s ease forwards;
+  transition:all 1s ease;
 }
-@keyframes zoomIn{
-  from{transform:scale(.6);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-.finalCard h1{
+
+.paper h1{
   color:#ff3f87;
-  font-size:34px;
+  font-size:22px;
+  margin:0;
 }
-.finalCard p{
+
+.cursor{
+  display:inline-block;
+  width:2px;
+  height:22px;
+  background:#ff3f87;
+  margin-left:4px;
+  animation:blinkCursor 1s infinite;
+}
+@keyframes blinkCursor{
+  0%,50%{opacity:1}
+  51%,100%{opacity:0}
+}
+
+.paper p{
   color:#ff3f87;
-  font-size:20px;
+  font-size:18px;
   opacity:0;
   transition:opacity 1s ease;
 }
@@ -166,11 +197,10 @@ button{
 .heart{
   position:absolute;
   animation:floatHeart 6s linear forwards;
-  opacity:.8;
 }
 @keyframes floatHeart{
   from{transform:translateY(40px) scale(.6);opacity:0}
-  20%{opacity:.8}
+  20%{opacity:1}
   to{transform:translateY(-120px) scale(1);opacity:0}
 }
 </style>
@@ -178,8 +208,10 @@ button{
 
 <body>
 
+<div id="topTitle">Pour Chaimaa ❤️</div>
+<div id="title">À ma femme</div>
+
 <div class="card" id="intro">
-  <h1>Pour Chaimaa ❤️</h1>
   <p>Clique sur l’enveloppe</p>
   <img src="IMG_5431.jpeg" class="envelope" onclick="openIntro()">
 </div>
@@ -195,12 +227,17 @@ button{
     <h2 id="hackTop">TRÈS BIEN</h2>
     <p>JE VAIS TE HACKER MAINTENANT ⚠️</p>
     <div class="progress"><div class="bar" id="bar"></div></div>
-    <div class="hackProgressText">HACK PROGRESS…</div>
   </div>
 </div>
 
 <div id="final">
-  <img src="IMG_5431.jpeg" class="envelope" onclick="openFinal()">
+  <div onclick="openFinal()" style="position:relative">
+    <img src="IMG_5431.jpeg" width="220">
+    <div class="paper" id="paper">
+      <h1 id="typeText"></h1><span class="cursor" id="cursor"></span>
+      <p id="subText">Joyeuse Saint Chaimaa Beauté 💖</p>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -212,7 +249,7 @@ const questions=[
 const hackMsgs=["TRÈS BIEN","HACK EN COURS","SYSTÈME COMPROMIS","ERREUR SYSTÈME","TERMINÉ"];
 const errors=["ERROR 0xA94F","ACCESS DENIED","SYSTEM FAILURE","⚠️","DATA LOST"];
 
-let q=0,h=0, chaos;
+let q=0,h=0,chaos;
 
 window.onload=()=>intro.style.display="block";
 
@@ -227,8 +264,6 @@ function spawnQuestionEmoji(){
   e.className="qEmoji";
   e.innerHTML=emoji;
   e.style.left=Math.random()*80+"%";
-  e.style.bottom="10px";
-  e.style.fontSize=22+Math.random()*22+"px";
   question.appendChild(e);
   setTimeout(()=>e.remove(),3000);
 }
@@ -253,12 +288,13 @@ function spawnHackChaos(){
   e.innerHTML=errors[Math.floor(Math.random()*errors.length)];
   e.style.left=Math.random()*100+"vw";
   e.style.top=Math.random()*100+"vh";
-  e.style.fontSize=14+Math.random()*26+"px";
   document.body.appendChild(e);
   setTimeout(()=>e.remove(),2500);
 }
 
 function startHack(){
+  title.style.display="none";
+  topTitle.style.display="none";
   hack.style.display="block";
   chaos=setInterval(spawnHackChaos,70);
 
@@ -269,25 +305,24 @@ function startHack(){
     if(h>=hackMsgs.length){
       clearInterval(i);
       clearInterval(chaos);
-      setTimeout(()=>{
-        hack.style.display="none";
-        document.body.style.background="url('IMG_1083.jpeg') center/cover no-repeat";
-        final.style.display="flex";
-      },900);
+      hack.style.display="none";
+      document.body.style.background="url('IMG_1083.jpeg') center/cover no-repeat";
+      final.style.display="flex";
     }
   },900);
 }
 
 function openFinal(){
-  final.innerHTML=`
-    <div class="finalCard">
-      <h1 id="typeText"></h1>
-      <p id="subText">Joyeuse Saint Chaimaa Beauté 💖</p>
-    </div>`;
-  typeWriter("Je t’aime ❤️","typeText",120,()=>{
-    document.getElementById("subText").style.opacity=1;
-  });
-  setInterval(spawnHeart,250);
+  paper.style.opacity=1;
+  paper.style.transform="translate(-50%,-40px)";
+
+  setTimeout(()=>{
+    typeWriter("Je t’aime ❤️","typeText",120,()=>{
+      cursor.style.display="none";
+      subText.style.opacity=1;
+    });
+    setInterval(spawnHeart,250);
+  },900);
 }
 
 function typeWriter(text,id,speed,cb){
@@ -309,7 +344,6 @@ function spawnHeart(){
   h.innerHTML="❤️";
   h.style.left=Math.random()*100+"vw";
   h.style.top=Math.random()*100+"vh";
-  h.style.fontSize=16+Math.random()*26+"px";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
 }
