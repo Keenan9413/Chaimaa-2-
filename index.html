@@ -2,198 +2,255 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pour Chaimaa ❤️</title>
 
 <style>
-*{box-sizing:border-box;font-family:"Segoe UI",sans-serif}
 body{
   margin:0;
   height:100vh;
-  background:linear-gradient(135deg,#ff9acb,#ff6fae);
   display:flex;
   justify-content:center;
   align-items:center;
+  background:linear-gradient(135deg,#ff9acb,#ff5fa2);
+  font-family:Arial,sans-serif;
+  overflow:hidden;
+  transition:background 1s ease;
+}
+
+/* ===== TITRE ===== */
+#title{
+  position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:34px;
+  font-weight:bold;
+  color:white;
+  text-shadow:0 4px 12px rgba(0,0,0,.3);
+  z-index:20;
+}
+
+/* ===== CARTES ===== */
+.card{
+  display:none;
+  background:#ffd6e8;
+  padding:25px;
+  border-radius:22px;
+  width:90%;
+  max-width:360px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  position:relative;
+  z-index:5;
   overflow:hidden;
 }
 
-.card{
-  background:#ffe3f0;
-  padding:30px 40px;
-  border-radius:25px;
-  box-shadow:0 20px 40px rgba(0,0,0,.2);
-  text-align:center;
-  width:320px;
-  position:relative;
+/* ===== ENVELOPPE ===== */
+.envelope{
+  width:200px;
+  cursor:pointer;
+  animation:bounce 1.4s infinite;
+}
+@keyframes bounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-10px);}
 }
 
+/* ===== BOUTONS ===== */
 button{
+  padding:12px 22px;
   border:none;
-  padding:12px 25px;
-  margin:15px;
-  border-radius:20px;
-  font-size:18px;
+  border-radius:25px;
+  font-size:16px;
   cursor:pointer;
+  margin:10px;
 }
-.yes{background:#ff5fa2;color:white}
-.no{background:#ddd}
+#yes{background:#ff4081;color:white;}
+#no{background:#ccc;position:absolute}
 
-.questionEmoji{
+/* ===== EMOJIS QUESTIONS ===== */
+.qEmoji{
   position:absolute;
-  font-size:26px;
-  animation:floatUp 3s linear forwards;
+  animation:floatQ 3s ease-out forwards;
+  pointer-events:none;
+}
+@keyframes floatQ{
+  from{transform:translateY(20px);opacity:0}
+  20%{opacity:1}
+  to{transform:translateY(-80px);opacity:0}
 }
 
-@keyframes floatUp{
-  from{opacity:1;transform:translateY(0)}
-  to{opacity:0;transform:translateY(-120px)}
-}
-
-/* HACK */
+/* ===== HACK ===== */
 #hack{
-  display:none;
-  position:fixed;
-  inset:0;
   background:black;
-  color:#0f0;
-  font-family:monospace;
-  padding:40px;
-  z-index:10;
+  color:red;
+  border:4px solid red;
+  animation:blink .15s infinite alternate;
 }
-#hackTop{font-size:18px}
-#bar{
-  margin-top:20px;
-  height:6px;
-  background:#0f0;
+@keyframes blink{
+  from{transform:scale(1);}
+  to{transform:scale(1.06);}
+}
+.hackBox{animation:shake .12s infinite;}
+@keyframes shake{
+  0%{transform:translate(0,0);}
+  25%{transform:translate(4px,-4px);}
+  50%{transform:translate(-4px,4px);}
+  75%{transform:translate(4px,4px);}
+  100%{transform:translate(0,0);}
+}
+.progress{
+  width:100%;
+  height:14px;
+  background:#330000;
+  border-radius:10px;
+  margin-top:15px;
+  overflow:hidden;
+}
+.bar{
+  height:100%;
   width:0%;
+  background:red;
+  transition:width .7s linear;
+}
+.hackProgressText{
+  margin-top:10px;
+  font-size:13px;
+  font-weight:bold;
+  animation:flash .6s infinite;
+}
+@keyframes flash{
+  0%,100%{opacity:1;}
+  50%{opacity:0;}
 }
 
-/* erreurs hack */
-.hackError{
+/* ===== CHAOS EXTÉRIEUR ===== */
+.hackChaos{
   position:fixed;
-  color:#ff2b2b;
-  font-size:12px;
-  font-family:monospace;
-  background:rgba(0,0,0,.75);
-  padding:6px 10px;
-  border-radius:6px;
-  box-shadow:0 0 10px red;
-  animation:errorBlink .25s infinite alternate,errorShake .15s infinite;
-  z-index:20;
+  z-index:1;
+  color:red;
+  font-weight:bold;
+  pointer-events:none;
+  animation:chaos 2.5s linear forwards;
 }
-@keyframes errorBlink{from{opacity:1}to{opacity:.3}}
-@keyframes errorShake{
-  0%{transform:translate(0,0)}
-  25%{transform:translate(2px,-2px)}
-  50%{transform:translate(-2px,2px)}
-  75%{transform:translate(2px,2px)}
-  100%{transform:translate(0,0)}
+@keyframes chaos{
+  from{opacity:0;transform:scale(.6)}
+  20%{opacity:1}
+  to{opacity:0;transform:translateY(-80px) scale(1.2)}
 }
 
-/* enveloppe */
-#envelope{
-  display:none;
-  width:120px;
-  height:80px;
-  background:#fff;
-  position:relative;
-  border-radius:10px;
-  cursor:pointer;
-}
-#envelope::before{
-  content:"";
-  position:absolute;
+/* ===== FINAL ===== */
+#final{
+  position:fixed;
   inset:0;
-  background:linear-gradient(135deg,transparent 50%,#f3f3f3 50%);
-  border-radius:10px;
-}
-
-/* lettre */
-#letter{
   display:none;
-  position:absolute;
-  inset:0;
-  display:flex;
   justify-content:center;
   align-items:center;
-}
-#letterCard{
-  background:#ffe3f0;
-  padding:30px 40px;
-  border-radius:25px;
-  box-shadow:0 20px 40px rgba(0,0,0,.2);
-  text-align:center;
-  position:relative;
-}
-#finalText{
-  font-size:36px;
-  color:#ff4f9a;
-}
-#subText{
-  margin-top:15px;
-  font-size:20px;
-  color:#ff4f9a;
+  z-index:10;
+  flex-direction:column;
 }
 
-.heart{
-  position:fixed;
-  font-size:24px;
-  animation:heartFloat 3s linear forwards;
+.finalCard{
+  background:#ffe4ef;
+  border-radius:28px;
+  padding:35px 25px;
+  max-width:420px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  animation:zoomIn 1s ease forwards;
 }
-@keyframes heartFloat{
-  from{opacity:1;transform:translateY(0)}
-  to{opacity:0;transform:translateY(-150px)}
+@keyframes zoomIn{
+  from{transform:scale(.6);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+.finalCard h1{
+  color:#ff3f87;
+  font-size:34px;
+}
+.finalCard p{
+  color:#ff3f87;
+  font-size:20px;
+  opacity:0;
+  transition:opacity 1s ease;
+}
+
+/* ===== COEURS ===== */
+.heart{
+  position:absolute;
+  animation:floatHeart 6s linear forwards;
+  opacity:.8;
+}
+@keyframes floatHeart{
+  from{transform:translateY(40px) scale(.6);opacity:0}
+  20%{opacity:.8}
+  to{transform:translateY(-120px) scale(1);opacity:0}
 }
 </style>
 </head>
 
 <body>
 
+<div id="title">À ma femme</div>
+
+<div class="card" id="intro">
+  <p>Clique sur l’enveloppe</p>
+  <img src="IMG_5431.jpeg" class="envelope" onclick="openIntro()">
+</div>
+
 <div class="card" id="question">
-  <h2 id="qText"></h2>
-  <button class="yes" onclick="yes()">Oui</button>
-  <button class="no">Non</button>
+  <h1 id="qText">Veux-tu être ma future femme ? 💍</h1>
+  <button id="yes" onclick="nextQuestion()">Oui ❤️</button>
+  <button id="no" onmouseover="moveNo()">Non 💔</button>
 </div>
 
-<div id="hack">
-  <div id="hackTop"></div>
-  <div id="bar"></div>
-</div>
-
-<div id="envelope" onclick="openLetter()"></div>
-
-<div id="letter">
-  <div id="letterCard">
-    <div id="finalText"></div>
-    <div id="subText"></div>
+<div class="card" id="hack">
+  <div class="hackBox">
+    <h2 id="hackTop">TRÈS BIEN</h2>
+    <p>JE VAIS TE HACKER MAINTENANT ⚠️</p>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="hackProgressText">HACK PROGRESS…</div>
   </div>
+</div>
+
+<div id="final">
+  <img src="IMG_5431.jpeg" class="envelope" onclick="openFinal()">
 </div>
 
 <script>
 const questions=[
-  "Tu m’aimes ? ❤️",
-  "Tu veux être toujours avec moi ? 💍",
-  "Veux-tu être ma future femme ? 👰"
+  "Veux-tu être ma future femme ? 💍",
+  "Réfléchis bien… 😘",
+  "T’es sûre ? 🤍"
 ];
-let q=0;
+const hackMsgs=["TRÈS BIEN","HACK EN COURS","SYSTÈME COMPROMIS","ERREUR SYSTÈME","TERMINÉ"];
+const errors=["ERROR 0xA94F","ACCESS DENIED","SYSTEM FAILURE","⚠️","DATA LOST"];
 
-const qText=document.getElementById("qText");
-const question=document.getElementById("question");
-qText.innerText=questions[q];
+let q=0,h=0, chaos;
+
+window.onload=()=>intro.style.display="block";
+
+function openIntro(){
+  intro.style.display="none";
+  question.style.display="block";
+}
 
 function spawnQuestionEmoji(){
+  const emoji=questions[q].match(/[\p{Emoji}]/gu)?.join("")||"❤️";
   const e=document.createElement("div");
-  e.className="questionEmoji";
-  e.innerText=questions[q].match(/[\p{Emoji}]/u)[0];
+  e.className="qEmoji";
+  e.innerHTML=emoji;
   e.style.left=Math.random()*80+"%";
-  e.style.top=Math.random()*60+"%";
+  e.style.bottom="10px";
+  e.style.fontSize=22+Math.random()*22+"px";
   question.appendChild(e);
   setTimeout(()=>e.remove(),3000);
 }
 
-function yes(){
-  const i=setInterval(spawnQuestionEmoji,120);
+function nextQuestion(){
+  const rain=setInterval(spawnQuestionEmoji,120);
   setTimeout(()=>{
-    clearInterval(i);
+    clearInterval(rain);
     q++;
     if(q<questions.length){
       qText.innerText=questions[q];
@@ -204,38 +261,21 @@ function yes(){
   },800);
 }
 
-/* hack */
-const hack=document.getElementById("hack");
-const hackTop=document.getElementById("hackTop");
-const bar=document.getElementById("bar");
-const hackMsgs=[
-  "Connexion au serveur...",
-  "Accès aux données...",
-  "Injection du payload...",
-  "Désactivation sécurité...",
-  "Contrôle total acquis"
-];
-let h=0;
-
-const errorMessages=[
-  "ERROR 0x000FF","ACCESS DENIED","MEMORY CORRUPTED",
-  "SYSTEM FAILURE","DATA BREACH","KERNEL PANIC"
-];
-let hackErrorInterval;
-
-function spawnHackError(){
+function spawnHackChaos(){
   const e=document.createElement("div");
-  e.className="hackError";
-  e.innerText=errorMessages[Math.floor(Math.random()*errorMessages.length)];
+  e.className="hackChaos";
+  e.innerHTML=errors[Math.floor(Math.random()*errors.length)];
   e.style.left=Math.random()*100+"vw";
   e.style.top=Math.random()*100+"vh";
+  e.style.fontSize=14+Math.random()*26+"px";
   document.body.appendChild(e);
-  setTimeout(()=>e.remove(),1500);
+  setTimeout(()=>e.remove(),2500);
 }
 
 function startHack(){
+  document.getElementById("title").style.display="none"; // 👈 le titre disparaît ici
   hack.style.display="block";
-  hackErrorInterval=setInterval(spawnHackError,120);
+  chaos=setInterval(spawnHackChaos,70);
 
   const i=setInterval(()=>{
     hackTop.innerText=hackMsgs[h];
@@ -243,48 +283,54 @@ function startHack(){
     h++;
     if(h>=hackMsgs.length){
       clearInterval(i);
-      clearInterval(hackErrorInterval);
-      document.querySelectorAll(".hackError").forEach(e=>e.remove());
+      clearInterval(chaos);
       setTimeout(()=>{
         hack.style.display="none";
-        document.getElementById("envelope").style.display="block";
-      },800);
+        document.body.style.background="url('IMG_1083.jpeg') center/cover no-repeat";
+        final.style.display="flex";
+      },900);
     }
   },900);
 }
 
-/* lettre */
-function openLetter(){
-  document.getElementById("envelope").style.display="none";
-  document.getElementById("letter").style.display="flex";
-  typeText("Je t’aime ❤️",document.getElementById("finalText"),()=>{
-    spawnHearts();
-    document.getElementById("subText").innerText="Joyeuse Saint Chaimaa Beauté 💖";
+function openFinal(){
+  final.innerHTML=`
+    <div class="finalCard">
+      <h1 id="typeText"></h1>
+      <p id="subText">Joyeuse Saint Chaimaa Beauté 💖</p>
+    </div>`;
+  typeWriter("Je t’aime ❤️","typeText",120,()=>{
+    document.getElementById("subText").style.opacity=1;
   });
+  setInterval(spawnHeart,250);
 }
 
-function typeText(text,el,cb){
+function typeWriter(text,id,speed,cb){
   let i=0;
+  const el=document.getElementById(id);
+  el.innerHTML="";
   const t=setInterval(()=>{
-    el.innerText+=text[i];
-    i++;
+    el.innerHTML+=text.charAt(i++);
     if(i>=text.length){
       clearInterval(t);
-      cb();
+      cb&&cb();
     }
-  },120);
+  },speed);
 }
 
-function spawnHearts(){
-  const i=setInterval(()=>{
-    const h=document.createElement("div");
-    h.className="heart";
-    h.innerText="❤️";
-    h.style.left=Math.random()*100+"vw";
-    h.style.top="100vh";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),3000);
-  },150);
+function spawnHeart(){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.top=Math.random()*100+"vh";
+  h.style.fontSize=16+Math.random()*26+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+}
+
+function moveNo(){
+  no.style.transform=`translate(${Math.random()*120-60}px,${Math.random()*80-40}px)`;
 }
 </script>
 
