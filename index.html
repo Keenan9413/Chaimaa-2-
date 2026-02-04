@@ -18,13 +18,24 @@ body{
   transition:background 1s ease;
 }
 
-/* ===== TITRE HAUT ===== */
-#title{
+/* ===== TITRES ===== */
+#topTitle{
   position:fixed;
-  top:110px;
+  top:35px;
   left:50%;
   transform:translateX(-50%);
-  font-size:32px;
+  font-size:28px;
+  font-weight:bold;
+  color:#ff2f7d;
+  z-index:20;
+}
+
+#title{
+  position:fixed;
+  top:95px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:30px;
   font-weight:900;
   color:#c00000;
   text-decoration:underline;
@@ -35,26 +46,18 @@ body{
 .card{
   display:none;
   background:#ffd6e8;
-  padding:30px 25px;
-  border-radius:28px;
+  padding:25px;
+  border-radius:22px;
   width:90%;
   max-width:360px;
   text-align:center;
-  box-shadow:0 15px 35px rgba(0,0,0,.25);
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
   position:relative;
   z-index:5;
 }
 
-/* ===== TITRE INTRO ===== */
-.introTitle{
-  font-size:30px;
-  font-weight:900;
-  color:#000;
-  margin-bottom:10px;
-}
-
-/* ===== ENVELOPPE ===== */
-.envelope{
+/* ===== ENVELOPPE INTRO ===== */
+.envelopeIntro{
   width:200px;
   cursor:pointer;
   animation:bounce 1.4s infinite;
@@ -64,7 +67,7 @@ body{
   50%{transform:translateY(-10px);}
 }
 
-/* ===== BOUTONS ===== */
+/* ===== QUESTIONS ===== */
 button{
   padding:12px 22px;
   border:none;
@@ -146,20 +149,26 @@ button{
   z-index:10;
 }
 
+.finalBox{
+  position:relative;
+  cursor:pointer;
+}
+
 /* ===== FEUILLE ===== */
 .paper{
   position:absolute;
   width:200px;
   height:140px;
   background:#ffe4ef;
-  top:40px;
+  top:30px;
   left:10px;
-  border-radius:12px;
+  border-radius:10px;
   opacity:0;
   transform:translateY(60px);
   box-shadow:0 10px 25px rgba(0,0,0,.25);
   padding:18px;
   text-align:center;
+  z-index:2;
 }
 
 .paper h1{
@@ -203,23 +212,20 @@ button{
 
 <body>
 
+<div id="topTitle">Pour Chaimaa ❤️</div>
 <div id="title">À ma femme</div>
 
-<!-- INTRO -->
 <div class="card" id="intro">
-  <h1 class="introTitle">Pour Chaimaa ❤️</h1>
   <p>Clique sur l’enveloppe</p>
-  <img src="IMG_5431.jpeg" class="envelope" onclick="openIntro()">
+  <img src="IMG_5431.jpeg" class="envelopeIntro" onclick="openIntro()">
 </div>
 
-<!-- QUESTIONS -->
 <div class="card" id="question">
   <h1 id="qText">Veux-tu être ma future femme ? 💍</h1>
   <button id="yes" onclick="nextQuestion()">Oui ❤️</button>
   <button id="no" onmouseover="moveNo()">Non 💔</button>
 </div>
 
-<!-- HACK -->
 <div class="card" id="hack">
   <div class="hackBox">
     <h2 id="hackTop">TRÈS BIEN</h2>
@@ -228,10 +234,9 @@ button{
   </div>
 </div>
 
-<!-- FINAL -->
 <div id="final">
-  <div onclick="openFinal()">
-    <img src="IMG_5431.jpeg" class="envelope">
+  <div class="finalBox" onclick="openFinal()">
+    <img src="IMG_5431.jpeg" width="220">
     <div class="paper" id="paper">
       <h1 id="typeText"></h1><span class="cursor" id="cursor"></span>
       <p id="subText">Joyeuse Saint Chaimaa Beauté 💖</p>
@@ -258,10 +263,9 @@ function openIntro(){
 }
 
 function spawnQuestionEmoji(){
-  const emoji=questions[q].match(/[\p{Emoji}]/gu)?.join("")||"❤️";
   const e=document.createElement("div");
   e.className="qEmoji";
-  e.innerHTML=emoji;
+  e.innerHTML="💍";
   e.style.left=Math.random()*80+"%";
   question.appendChild(e);
   setTimeout(()=>e.remove(),3000);
@@ -293,6 +297,7 @@ function spawnHackChaos(){
 
 function startHack(){
   title.style.display="none";
+  topTitle.style.display="none";
   hack.style.display="block";
   chaos=setInterval(spawnHackChaos,70);
 
@@ -316,7 +321,7 @@ function openFinal(){
   paper.style.transition="all 1s ease";
 
   setTimeout(()=>{
-    typeWriter("Je t’aime ❤️","typeText",120,()=>{
+    typeWriterPlume("Je t’aime ❤️","typeText",120,()=>{
       cursor.style.display="none";
       subText.style.opacity=1;
     });
@@ -324,7 +329,7 @@ function openFinal(){
   },900);
 }
 
-function typeWriter(text,id,speed,cb){
+function typeWriterPlume(text,id,speed,cb){
   let i=0;
   const el=document.getElementById(id);
   el.innerHTML="";
