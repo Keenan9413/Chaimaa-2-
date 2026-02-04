@@ -21,11 +21,11 @@ body{
 /* ===== TITRE ===== */
 #title{
   position:fixed;
-  top:60px;                 /* ⬇️ moins haut */
+  top:120px; /* position symétrique */
   left:50%;
   transform:translateX(-50%);
   font-size:32px;
-  font-weight:bold;
+  font-weight:900;
   color:red;
   text-decoration:underline;
   z-index:20;
@@ -147,31 +147,29 @@ button{
   display:none;
   justify-content:center;
   align-items:center;
-  z-index:10;
   flex-direction:column;
+  z-index:10;
 }
 
 /* ===== ENVELOPPE OUVERTURE ===== */
-.envelopeOpen{
-  position:relative;
+.envelopeFinal{
   width:220px;
-  height:140px;
-  background:#fff;
-  border-radius:16px;
-  box-shadow:0 10px 25px rgba(0,0,0,.25);
   cursor:pointer;
-  overflow:hidden;
+  animation:bounce 1.4s infinite;
+  position:relative;
 }
+
 .flap{
   position:absolute;
   top:0;
   left:0;
   width:100%;
   height:100%;
-  background:#fff;
+  background:url("IMG_5431.jpeg") center/contain no-repeat;
   transform-origin:top;
   animation:openFlap 1.2s forwards;
 }
+
 @keyframes openFlap{
   to{transform:rotateX(160deg);opacity:0}
 }
@@ -217,7 +215,7 @@ button{
 
 <body>
 
-<div id="title">À ma femme</div>
+<div id="title"><strong>À ma femme</strong></div>
 
 <div class="card" id="intro">
   <p>Clique sur l’enveloppe</p>
@@ -240,9 +238,7 @@ button{
 </div>
 
 <div id="final">
-  <div class="envelopeOpen" onclick="openFinal()">
-    <div class="flap"></div>
-  </div>
+  <img src="IMG_5431.jpeg" class="envelopeFinal" onclick="openFinal()">
 </div>
 
 <script>
@@ -323,9 +319,7 @@ function startHack(){
 
 function openFinal(){
   final.innerHTML=`
-    <div class="envelopeOpen">
-      <div class="flap"></div>
-    </div>
+    <img src="IMG_5431.jpeg" class="envelopeFinal">
     <div class="finalCard">
       <h1 id="typeText"></h1>
       <p id="subText">Joyeuse Saint Chaimaa Beauté 💖</p>
