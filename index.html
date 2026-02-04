@@ -18,43 +18,26 @@ body{
   transition:background 1s ease;
 }
 
-/* ===== TITRES ===== */
-#topTitle{
-  position:fixed;
-  top:40px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:28px;
-  font-weight:bold;
-  color:#ff2f7d;
-  z-index:20;
-}
-
-#title{
-  position:fixed;
-  top:120px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:32px;
-  font-weight:900;
-  color:#c00000;
-  text-decoration:underline;
-  z-index:20;
-}
-
 /* ===== CARTES ===== */
 .card{
   display:none;
   background:#ffd6e8;
-  padding:25px;
-  border-radius:22px;
+  padding:30px 25px;
+  border-radius:28px;
   width:90%;
   max-width:360px;
   text-align:center;
-  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  box-shadow:0 15px 35px rgba(0,0,0,.25);
   position:relative;
   z-index:5;
-  overflow:hidden;
+}
+
+/* ===== TITRE INTRO (COMME PHOTO) ===== */
+.introTitle{
+  font-size:30px;
+  font-weight:900;
+  color:#000;
+  margin-bottom:12px;
 }
 
 /* ===== ENVELOPPE ===== */
@@ -116,6 +99,7 @@ button{
   height:14px;
   background:#330000;
   border-radius:10px;
+  margin-top:15px;
   overflow:hidden;
 }
 .bar{
@@ -124,8 +108,18 @@ button{
   background:red;
   transition:width .7s linear;
 }
+.hackProgressText{
+  margin-top:10px;
+  font-size:13px;
+  font-weight:bold;
+  animation:flash .6s infinite;
+}
+@keyframes flash{
+  0%,100%{opacity:1;}
+  50%{opacity:0;}
+}
 
-/* ===== CHAOS EXTÉRIEUR ===== */
+/* ===== CHAOS ===== */
 .hackChaos{
   position:fixed;
   z-index:1;
@@ -157,14 +151,13 @@ button{
   height:140px;
   background:#ffe4ef;
   top:40px;
-  left:50%;
-  transform:translate(-50%,60px);
-  border-radius:10px;
+  left:10px;
+  border-radius:12px;
   opacity:0;
+  transform:translateY(60px);
   box-shadow:0 10px 25px rgba(0,0,0,.25);
   padding:18px;
   text-align:center;
-  transition:all 1s ease;
 }
 
 .paper h1{
@@ -208,31 +201,34 @@ button{
 
 <body>
 
-<div id="topTitle">Pour Chaimaa ❤️</div>
-<div id="title">À ma femme</div>
-
+<!-- INTRO -->
 <div class="card" id="intro">
+  <h1 class="introTitle">Pour Chaimaa ❤️</h1>
   <p>Clique sur l’enveloppe</p>
   <img src="IMG_5431.jpeg" class="envelope" onclick="openIntro()">
 </div>
 
+<!-- QUESTIONS -->
 <div class="card" id="question">
   <h1 id="qText">Veux-tu être ma future femme ? 💍</h1>
   <button id="yes" onclick="nextQuestion()">Oui ❤️</button>
   <button id="no" onmouseover="moveNo()">Non 💔</button>
 </div>
 
+<!-- HACK -->
 <div class="card" id="hack">
   <div class="hackBox">
     <h2 id="hackTop">TRÈS BIEN</h2>
     <p>JE VAIS TE HACKER MAINTENANT ⚠️</p>
     <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="hackProgressText">HACK PROGRESS…</div>
   </div>
 </div>
 
+<!-- FINAL -->
 <div id="final">
-  <div onclick="openFinal()" style="position:relative">
-    <img src="IMG_5431.jpeg" width="220">
+  <div onclick="openFinal()">
+    <img src="IMG_5431.jpeg" class="envelope">
     <div class="paper" id="paper">
       <h1 id="typeText"></h1><span class="cursor" id="cursor"></span>
       <p id="subText">Joyeuse Saint Chaimaa Beauté 💖</p>
@@ -259,7 +255,7 @@ function openIntro(){
 }
 
 function spawnQuestionEmoji(){
-  const emoji = questions[q].match(/[\p{Emoji}]/gu)?.join("") || "❤️";
+  const emoji=questions[q].match(/[\p{Emoji}]/gu)?.join("")||"❤️";
   const e=document.createElement("div");
   e.className="qEmoji";
   e.innerHTML=emoji;
@@ -293,8 +289,6 @@ function spawnHackChaos(){
 }
 
 function startHack(){
-  title.style.display="none";
-  topTitle.style.display="none";
   hack.style.display="block";
   chaos=setInterval(spawnHackChaos,70);
 
@@ -314,10 +308,11 @@ function startHack(){
 
 function openFinal(){
   paper.style.opacity=1;
-  paper.style.transform="translate(-50%,-40px)";
+  paper.style.transform="translateY(-40px)";
+  paper.style.transition="all 1s ease";
 
   setTimeout(()=>{
-    typeWriter("Je t’aime ❤️","typeText",120,()=>{
+    typeWriterPlume("Je t’aime ❤️","typeText",120,()=>{
       cursor.style.display="none";
       subText.style.opacity=1;
     });
@@ -325,7 +320,7 @@ function openFinal(){
   },900);
 }
 
-function typeWriter(text,id,speed,cb){
+function typeWriterPlume(text,id,speed,cb){
   let i=0;
   const el=document.getElementById(id);
   el.innerHTML="";
