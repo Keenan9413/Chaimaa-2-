@@ -80,7 +80,7 @@ button{
   to{transform:translateY(-80px);opacity:0}
 }
 
-/* ===== HACK ===== */
+/* ===== HACK (IDENTIQUE À TON ANCIEN) ===== */
 #hack{
   background:black;
   color:red;
@@ -113,7 +113,7 @@ button{
   transition:width .7s linear;
 }
 
-/* ===== CHAOS HACK EXT ===== */
+/* ===== CHAOS EXTÉRIEUR ===== */
 .hackChaos{
   position:fixed;
   z-index:1;
@@ -145,18 +145,20 @@ button{
   position:relative;
 }
 
+/* ===== FEUILLE ROSE ===== */
 .paper{
   position:absolute;
   width:200px;
-  height:120px;
-  background:white;
+  height:130px;
+  background:#ffe4ef;
   top:40px;
   left:10px;
-  border-radius:6px;
+  border-radius:10px;
   opacity:0;
   transform:translateY(60px);
   box-shadow:0 10px 25px rgba(0,0,0,.25);
-  padding:15px;
+  padding:18px;
+  text-align:center;
 }
 
 .paper h1{
@@ -168,6 +170,7 @@ button{
   color:#ff3f87;
   font-size:18px;
   opacity:0;
+  transition:opacity 1s ease;
 }
 
 /* ===== COEURS ===== */
@@ -201,7 +204,7 @@ button{
 <div class="card" id="hack">
   <div class="hackBox">
     <h2 id="hackTop">TRÈS BIEN</h2>
-    <p>JE VAIS TE HACKER ⚠️</p>
+    <p>JE VAIS TE HACKER MAINTENANT ⚠️</p>
     <div class="progress"><div class="bar" id="bar"></div></div>
   </div>
 </div>
@@ -222,8 +225,8 @@ const questions=[
   "Réfléchis bien… 😘",
   "T’es sûre ? 🤍"
 ];
-const hackMsgs=["TRÈS BIEN","HACK EN COURS","SYSTÈME COMPROMIS","ERREUR","TERMINÉ"];
-const errors=["⚠️","ERROR","ACCESS DENIED","SYSTEM FAIL"];
+const hackMsgs=["TRÈS BIEN","HACK EN COURS","SYSTÈME COMPROMIS","ERREUR SYSTÈME","TERMINÉ"];
+const errors=["ERROR 0xA94F","ACCESS DENIED","SYSTEM FAILURE","⚠️","DATA LOST"];
 
 let q=0,h=0,chaos;
 
