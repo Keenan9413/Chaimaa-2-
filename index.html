@@ -18,7 +18,18 @@ body{
   transition:background 1s ease;
 }
 
-/* ===== TITRE ===== */
+/* ===== TITRES ===== */
+#topTitle{
+  position:fixed;
+  top:40px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:28px;
+  font-weight:bold;
+  color:#ff2f7d;
+  z-index:20;
+}
+
 #title{
   position:fixed;
   top:120px;
@@ -80,7 +91,7 @@ button{
   to{transform:translateY(-80px);opacity:0}
 }
 
-/* ===== HACK (IDENTIQUE À TON ANCIEN) ===== */
+/* ===== HACK ===== */
 #hack{
   background:black;
   color:red;
@@ -113,7 +124,7 @@ button{
   transition:width .7s linear;
 }
 
-/* ===== CHAOS EXTÉRIEUR ===== */
+/* ===== CHAOS ===== */
 .hackChaos{
   position:fixed;
   z-index:1;
@@ -138,18 +149,11 @@ button{
   z-index:10;
 }
 
-/* ===== ENVELOPPE FINALE ===== */
-.finalEnvelope{
-  width:220px;
-  cursor:pointer;
-  position:relative;
-}
-
-/* ===== FEUILLE ROSE ===== */
+/* ===== FEUILLE ===== */
 .paper{
   position:absolute;
   width:200px;
-  height:130px;
+  height:140px;
   background:#ffe4ef;
   top:40px;
   left:10px;
@@ -163,9 +167,23 @@ button{
 
 .paper h1{
   color:#ff3f87;
-  font-size:24px;
+  font-size:22px;
   margin:0;
 }
+
+.cursor{
+  display:inline-block;
+  width:2px;
+  height:22px;
+  background:#ff3f87;
+  margin-left:4px;
+  animation:blinkCursor 1s infinite;
+}
+@keyframes blinkCursor{
+  0%,50%{opacity:1}
+  51%,100%{opacity:0}
+}
+
 .paper p{
   color:#ff3f87;
   font-size:18px;
@@ -188,6 +206,7 @@ button{
 
 <body>
 
+<div id="topTitle">Pour Chaimaa ❤️</div>
 <div id="title">À ma femme</div>
 
 <div class="card" id="intro">
@@ -210,10 +229,10 @@ button{
 </div>
 
 <div id="final">
-  <div class="finalEnvelope" onclick="openFinal()">
+  <div onclick="openFinal()">
     <img src="IMG_5431.jpeg" width="220">
     <div class="paper" id="paper">
-      <h1 id="typeText"></h1>
+      <h1 id="typeText"></h1><span class="cursor" id="cursor"></span>
       <p id="subText">Joyeuse Saint Chaimaa Beauté 💖</p>
     </div>
   </div>
@@ -272,6 +291,7 @@ function spawnHackChaos(){
 
 function startHack(){
   title.style.display="none";
+  topTitle.style.display="none";
   hack.style.display="block";
   chaos=setInterval(spawnHackChaos,70);
 
@@ -295,14 +315,15 @@ function openFinal(){
   paper.style.transition="all 1s ease";
 
   setTimeout(()=>{
-    typeWriter("Je t’aime ❤️","typeText",120,()=>{
+    typeWriterPlume("Je t’aime ❤️","typeText",120,()=>{
+      cursor.style.display="none";
       subText.style.opacity=1;
     });
     setInterval(spawnHeart,250);
   },900);
 }
 
-function typeWriter(text,id,speed,cb){
+function typeWriterPlume(text,id,speed,cb){
   let i=0;
   const el=document.getElementById(id);
   el.innerHTML="";
