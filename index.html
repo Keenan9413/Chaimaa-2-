@@ -28,8 +28,6 @@ body{
   font-weight:900;
   color:#c00000;
   text-decoration:underline;
-  letter-spacing:1px;
-  text-shadow:0 2px 6px rgba(0,0,0,.25);
   z-index:20;
 }
 
@@ -47,8 +45,8 @@ body{
   z-index:5;
 }
 
-/* ===== ENVELOPPE INTRO ===== */
-.envelope{
+/* ===== ENVELOPPE ===== */
+.envelopeIntro{
   width:200px;
   cursor:pointer;
   animation:bounce 1.4s infinite;
@@ -58,6 +56,78 @@ body{
   50%{transform:translateY(-10px);}
 }
 
+/* ===== QUESTIONS ===== */
+button{
+  padding:12px 22px;
+  border:none;
+  border-radius:25px;
+  font-size:16px;
+  cursor:pointer;
+  margin:10px;
+}
+#yes{background:#ff4081;color:white;}
+#no{background:#ccc;position:absolute}
+
+/* ===== EMOJIS QUESTIONS ===== */
+.qEmoji{
+  position:absolute;
+  animation:floatQ 3s ease-out forwards;
+  pointer-events:none;
+}
+@keyframes floatQ{
+  from{transform:translateY(20px);opacity:0}
+  20%{opacity:1}
+  to{transform:translateY(-80px);opacity:0}
+}
+
+/* ===== HACK ===== */
+#hack{
+  background:black;
+  color:red;
+  border:4px solid red;
+  animation:blink .15s infinite alternate;
+}
+@keyframes blink{
+  from{transform:scale(1);}
+  to{transform:scale(1.06);}
+}
+.hackBox{animation:shake .12s infinite;}
+@keyframes shake{
+  0%{transform:translate(0,0);}
+  25%{transform:translate(4px,-4px);}
+  50%{transform:translate(-4px,4px);}
+  75%{transform:translate(4px,4px);}
+  100%{transform:translate(0,0);}
+}
+.progress{
+  width:100%;
+  height:14px;
+  background:#330000;
+  border-radius:10px;
+  overflow:hidden;
+}
+.bar{
+  height:100%;
+  width:0%;
+  background:red;
+  transition:width .7s linear;
+}
+
+/* ===== CHAOS HACK EXT ===== */
+.hackChaos{
+  position:fixed;
+  z-index:1;
+  color:red;
+  font-weight:bold;
+  pointer-events:none;
+  animation:chaos 2.5s linear forwards;
+}
+@keyframes chaos{
+  from{opacity:0;transform:scale(.6)}
+  20%{opacity:1}
+  to{opacity:0;transform:translateY(-80px) scale(1.2)}
+}
+
 /* ===== FINAL ===== */
 #final{
   position:fixed;
@@ -65,51 +135,38 @@ body{
   display:none;
   justify-content:center;
   align-items:center;
-  flex-direction:column;
   z-index:10;
 }
 
-/* ===== ENVELOPPE RÉALISTE ===== */
-.envelopeBox{
-  position:relative;
-  width:260px;
-  height:180px;
+/* ===== ENVELOPPE FINALE ===== */
+.finalEnvelope{
+  width:220px;
   cursor:pointer;
+  position:relative;
 }
 
-.envelopeBox img{
-  width:100%;
-  position:absolute;
-  left:0;
-  top:0;
-}
-
-/* ===== FEUILLE ===== */
 .paper{
   position:absolute;
-  width:220px;
-  height:140px;
+  width:200px;
+  height:120px;
   background:white;
   top:40px;
-  left:20px;
+  left:10px;
   border-radius:6px;
-  transform:translateY(60px);
   opacity:0;
+  transform:translateY(60px);
   box-shadow:0 10px 25px rgba(0,0,0,.25);
-  padding:20px;
-  box-sizing:border-box;
+  padding:15px;
 }
 
-/* ===== TEXTE FINAL ===== */
 .paper h1{
   color:#ff3f87;
-  font-size:26px;
+  font-size:24px;
   margin:0;
 }
 .paper p{
   color:#ff3f87;
   font-size:18px;
-  margin-top:10px;
   opacity:0;
 }
 
@@ -132,13 +189,26 @@ body{
 
 <div class="card" id="intro">
   <p>Clique sur l’enveloppe</p>
-  <img src="envelope_closed.png" class="envelope" onclick="openIntro()">
+  <img src="IMG_5431.jpeg" class="envelopeIntro" onclick="openIntro()">
+</div>
+
+<div class="card" id="question">
+  <h1 id="qText">Veux-tu être ma future femme ? 💍</h1>
+  <button id="yes" onclick="nextQuestion()">Oui ❤️</button>
+  <button id="no" onmouseover="moveNo()">Non 💔</button>
+</div>
+
+<div class="card" id="hack">
+  <div class="hackBox">
+    <h2 id="hackTop">TRÈS BIEN</h2>
+    <p>JE VAIS TE HACKER ⚠️</p>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+  </div>
 </div>
 
 <div id="final">
-  <div class="envelopeBox" onclick="openEnvelope()">
-    <img src="envelope_closed.png" id="envClosed">
-    <img src="envelope_open.png" id="envOpen" style="display:none">
+  <div class="finalEnvelope" onclick="openFinal()">
+    <img src="IMG_5431.jpeg" width="220">
     <div class="paper" id="paper">
       <h1 id="typeText"></h1>
       <p id="subText">Joyeuse Saint Chaimaa Beauté 💖</p>
@@ -147,29 +217,86 @@ body{
 </div>
 
 <script>
+const questions=[
+  "Veux-tu être ma future femme ? 💍",
+  "Réfléchis bien… 😘",
+  "T’es sûre ? 🤍"
+];
+const hackMsgs=["TRÈS BIEN","HACK EN COURS","SYSTÈME COMPROMIS","ERREUR","TERMINÉ"];
+const errors=["⚠️","ERROR","ACCESS DENIED","SYSTEM FAIL"];
+
+let q=0,h=0,chaos;
+
 window.onload=()=>intro.style.display="block";
 
 function openIntro(){
   intro.style.display="none";
-  title.style.display="none";
-  document.body.style.background="url('IMG_1083.jpeg') center/cover no-repeat";
-  final.style.display="flex";
+  question.style.display="block";
 }
 
-function openEnvelope(){
-  envClosed.style.display="none";
-  envOpen.style.display="block";
+function spawnQuestionEmoji(){
+  const e=document.createElement("div");
+  e.className="qEmoji";
+  e.innerHTML="💍";
+  e.style.left=Math.random()*80+"%";
+  question.appendChild(e);
+  setTimeout(()=>e.remove(),3000);
+}
 
+function nextQuestion(){
+  const rain=setInterval(spawnQuestionEmoji,120);
+  setTimeout(()=>{
+    clearInterval(rain);
+    q++;
+    if(q<questions.length){
+      qText.innerText=questions[q];
+    }else{
+      question.style.display="none";
+      startHack();
+    }
+  },800);
+}
+
+function spawnHackChaos(){
+  const e=document.createElement("div");
+  e.className="hackChaos";
+  e.innerHTML=errors[Math.floor(Math.random()*errors.length)];
+  e.style.left=Math.random()*100+"vw";
+  e.style.top=Math.random()*100+"vh";
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),2500);
+}
+
+function startHack(){
+  title.style.display="none";
+  hack.style.display="block";
+  chaos=setInterval(spawnHackChaos,70);
+
+  const i=setInterval(()=>{
+    hackTop.innerText=hackMsgs[h];
+    bar.style.width=((h+1)/hackMsgs.length)*100+"%";
+    h++;
+    if(h>=hackMsgs.length){
+      clearInterval(i);
+      clearInterval(chaos);
+      hack.style.display="none";
+      document.body.style.background="url('IMG_1083.jpeg') center/cover no-repeat";
+      final.style.display="flex";
+    }
+  },900);
+}
+
+function openFinal(){
   paper.style.opacity=1;
   paper.style.transform="translateY(-40px)";
-  paper.style.transition="transform 1s ease, opacity 1s ease";
+  paper.style.transition="all 1s ease";
 
   setTimeout(()=>{
     typeWriter("Je t’aime ❤️","typeText",120,()=>{
       subText.style.opacity=1;
     });
     setInterval(spawnHeart,250);
-  },1000);
+  },900);
 }
 
 function typeWriter(text,id,speed,cb){
@@ -191,9 +318,12 @@ function spawnHeart(){
   h.innerHTML="❤️";
   h.style.left=Math.random()*100+"vw";
   h.style.top=Math.random()*100+"vh";
-  h.style.fontSize=18+Math.random()*24+"px";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
+}
+
+function moveNo(){
+  no.style.transform=`translate(${Math.random()*120-60}px,${Math.random()*80-40}px)`;
 }
 </script>
 
