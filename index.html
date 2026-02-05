@@ -18,7 +18,7 @@ body{
   transition:background 1s ease;
 }
 
-/* ===== TITRE À MA FEMME ===== */
+/* ===== TITRE ===== */
 #title{
   position:fixed;
   top:110px;
@@ -113,7 +113,7 @@ button{
   transition:width .7s linear;
 }
 
-/* ===== CHAOS EXTÉRIEUR ===== */
+/* ===== CHAOS ===== */
 .hackChaos{
   position:fixed;
   z-index:1;
@@ -138,31 +138,43 @@ button{
   z-index:10;
 }
 
+/* CONTENEUR ENVELOPPE */
+.finalBox{
+  position:relative;
+  width:220px;
+  height:180px;
+}
+
 /* ===== FEUILLE ===== */
 .paper{
   position:absolute;
   width:200px;
+  height:140px;
   background:#ffe4ef;
-  top:30px;
   left:10px;
+  bottom:40px;
   border-radius:10px;
   opacity:0;
   transform:translateY(60px);
   box-shadow:0 10px 25px rgba(0,0,0,.25);
   padding:18px;
   text-align:center;
+  z-index:1;
 }
+
 .paper h1{
   color:#ff3f87;
   font-size:22px;
   margin:0;
 }
+
 .paper p{
   color:#ff3f87;
   font-size:18px;
   opacity:0;
   transition:opacity 1s ease;
 }
+
 .cursor{
   display:inline-block;
   width:2px;
@@ -218,12 +230,12 @@ button{
 
 <!-- FINAL -->
 <div id="final">
-  <div onclick="openFinal()">
-    <img src="IMG_5431.jpeg" width="220">
+  <div class="finalBox" onclick="openFinal()">
     <div class="paper" id="paper">
       <h1 id="typeText"></h1><span class="cursor" id="cursor"></span>
       <p id="subText">Joyeuse Saint Chaimaa Beauté 💖</p>
     </div>
+    <img src="IMG_5431.jpeg" width="220" style="position:relative;z-index:2;">
   </div>
 </div>
 
@@ -233,6 +245,7 @@ const questions=[
   "Réfléchis bien… 😘",
   "T’es sûre ? 🤍"
 ];
+const emojis=["💍","😘","🤍"];
 const hackMsgs=["TRÈS BIEN","HACK EN COURS","SYSTÈME COMPROMIS","ERREUR SYSTÈME","TERMINÉ"];
 const errors=["ERROR 0xA94F","ACCESS DENIED","SYSTEM FAILURE","⚠️","DATA LOST"];
 
@@ -246,10 +259,9 @@ function openIntro(){
 }
 
 function spawnQuestionEmoji(){
-  const emoji = questions[q].match(/[\p{Emoji}]/gu)?.join("") || "❤️";
   const e=document.createElement("div");
   e.className="qEmoji";
-  e.innerHTML=emoji;
+  e.innerHTML=emojis[q];
   e.style.left=Math.random()*80+"%";
   e.style.bottom="10px";
   e.style.fontSize=22+Math.random()*22+"px";
@@ -302,7 +314,7 @@ function startHack(){
 
 function openFinal(){
   paper.style.opacity=1;
-  paper.style.transform="translateY(-40px)";
+  paper.style.transform="translateY(-80px)";
   paper.style.transition="all 1s ease";
 
   setTimeout(()=>{
