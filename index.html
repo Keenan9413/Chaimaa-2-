@@ -18,7 +18,7 @@ body{
   transition:background 1s ease;
 }
 
-/* ===== TITRE FIXE ===== */
+/* ===== TITRE ===== */
 #title{
   position:fixed;
   top:95px;
@@ -161,32 +161,32 @@ button{
   cursor:pointer;
 }
 
-/* ===== FEUILLE (TAILLE AJUSTÉE) ===== */
+/* ===== FEUILLE (VRAIMENT PLUS PETITE) ===== */
 .paper{
   position:absolute;
-  width:180px;              /* 👈 ajusté */
-  height:125px;             /* 👈 plus réaliste */
+  width:155px;        /* 👈 réduction nette */
+  height:95px;        /* 👈 réduction nette */
   background:#ffe4ef;
-  top:28px;
+  top:35px;
   left:50%;
-  transform:translateX(-50%) translateY(60px);
-  border-radius:10px;
+  transform:translateX(-50%) translateY(50px);
+  border-radius:8px;
   opacity:0;
-  box-shadow:0 10px 25px rgba(0,0,0,.25);
-  padding:16px;
+  box-shadow:0 8px 18px rgba(0,0,0,.25);
+  padding:12px;
   text-align:center;
   z-index:2;
 }
 
 .paper h1{
   color:#ff3f87;
-  font-size:22px;
+  font-size:20px;
   margin:0;
 }
 
 .paper p{
   color:#ff3f87;
-  font-size:18px;
+  font-size:16px;
   opacity:0;
   transition:opacity 1s ease;
 }
@@ -194,7 +194,7 @@ button{
 .cursor{
   display:inline-block;
   width:2px;
-  height:22px;
+  height:20px;
   background:#ff3f87;
   margin-left:4px;
   animation:blinkCursor 1s infinite;
@@ -325,7 +325,7 @@ function startHack(){
 
 function openFinal(){
   paper.style.opacity=1;
-  paper.style.transform="translateX(-50%) translateY(-40px)";
+  paper.style.transform="translateX(-50%) translateY(-25px)";
   paper.style.transition="all 1s ease";
 
   setTimeout(()=>{
