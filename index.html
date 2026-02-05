@@ -155,8 +155,33 @@ button{
   justify-content:center;
   align-items:center;
   z-index:10;
+  flex-direction:column;
 }
 
+  .finalCard{
+  background:#ffe4ef;
+  border-radius:28px;
+  padding:35px 25px;
+  max-width:420px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  animation:zoomIn 1s ease forwards;
+}
+@keyframes zoomIn{
+  from{transform:scale(.6);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+.finalCard h1{
+  color:#ff3f87;
+  font-size:34px;
+}
+.finalCard p{
+  color:#ff3f87;
+  font-size:20px;
+  opacity:0;
+  transition:opacity 1s ease;
+}
+  
 .finalBox{
   position:relative;
   cursor:pointer;
