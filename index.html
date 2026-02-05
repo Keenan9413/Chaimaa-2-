@@ -35,7 +35,7 @@ body{
 .card{
   display:none;
   background:#ffd6e8;
-  padding:30px 25px;
+  padding:25px;
   border-radius:22px;
   width:90%;
   max-width:360px;
@@ -45,9 +45,15 @@ body{
   z-index:5;
 }
 
-/* ===== ENVELOPPE (BOUNCE PARTOUT) ===== */
-.envelopeIntro,
-.envelopeFinal{
+/* ===== INTRO ===== */
+.introTitle{
+  font-size:30px;
+  font-weight:900;
+  margin-bottom:15px;
+}
+
+/* ===== ENVELOPPE (INTRO + FINAL) ===== */
+.envelope{
   width:200px;
   cursor:pointer;
   animation:bounce 1.4s infinite;
@@ -81,7 +87,7 @@ button{
   to{transform:translateY(-80px);opacity:0}
 }
 
-/* ================= HACK (REPRIS À 100%) ================= */
+/* ===== HACK (VERSION ORIGINALE) ===== */
 #hack{
   background:black;
   color:red;
@@ -217,9 +223,9 @@ button{
 
 <!-- INTRO -->
 <div class="card" id="intro">
-  <h1>Pour Chaimaa ❤️</h1>
+  <div class="introTitle">Pour Chaimaa ❤️</div>
   <p>Clique sur l’enveloppe</p>
-  <img src="IMG_5431.jpeg" class="envelopeIntro" onclick="openIntro()">
+  <img src="IMG_5431.jpeg" class="envelope" onclick="openIntro()">
 </div>
 
 <!-- QUESTIONS -->
@@ -242,7 +248,7 @@ button{
 <!-- FINAL -->
 <div id="final">
   <div class="finalBox" onclick="openFinal()">
-    <img src="IMG_5431.jpeg" class="envelopeFinal">
+    <img src="IMG_5431.jpeg" class="envelope">
     <div class="paper" id="paper">
       <h1 id="typeText"></h1><span class="cursor" id="cursor"></span>
       <p id="subText">Joyeuse Saint Chaimaa Beauté 💖</p>
@@ -314,11 +320,9 @@ function startHack(){
     if(h>=hackMsgs.length){
       clearInterval(i);
       clearInterval(chaos);
-      setTimeout(()=>{
-        hack.style.display="none";
-        document.body.style.background="url('IMG_1083.jpeg') center/cover no-repeat";
-        final.style.display="flex";
-      },900);
+      hack.style.display="none";
+      document.body.style.background="url('IMG_1083.jpeg') center/cover no-repeat";
+      final.style.display="flex";
     }
   },900);
 }
