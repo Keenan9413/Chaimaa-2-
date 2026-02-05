@@ -161,7 +161,7 @@ button{
   cursor:pointer;
 }
 
-/* ===== FEUILLE (LÉGÈREMENT PLUS GRANDE) ===== */
+/* ===== FEUILLE ===== */
 .paper{
   position:absolute;
   width:170px;
@@ -180,14 +180,14 @@ button{
 
 .paper h1{
   color:#ff3f87;
-  font-size:18px;
+  font-size:20px;
   margin:0;
 }
 
 .paper p{
   color:#ff3f87;
-  font-size:17px;
-  margin-top:6px;
+  font-size:16px;
+  margin:4px 0 0;
   opacity:0;
   transition:opacity 1s ease;
 }
@@ -195,7 +195,7 @@ button{
 .cursor{
   display:inline-block;
   width:2px;
-  height:18px;
+  height:20px;
   background:#ff3f87;
   margin-left:4px;
   animation:blinkCursor 1s infinite;
@@ -248,7 +248,8 @@ button{
     <img src="IMG_5431.jpeg" class="envelope">
     <div class="paper" id="paper">
       <h1 id="typeText"></h1><span class="cursor" id="cursor"></span>
-      <p id="subText">Beauté 💖</p>
+      <p id="line1">Joyeuse Saint Chaimaa</p>
+      <p id="line2">Beauté 💖</p>
     </div>
   </div>
 </div>
@@ -330,9 +331,10 @@ function openFinal(){
   paper.style.transition="all 1s ease";
 
   setTimeout(()=>{
-    typeWriter("Joyeuse Saint Chaimaa","typeText",110,()=>{
+    typeWriter("Je t’aime ❤️","typeText",120,()=>{
       cursor.style.display="none";
-      subText.style.opacity=1;
+      line1.style.opacity=1;
+      setTimeout(()=>line2.style.opacity=1,600);
     });
     setInterval(spawnHeart,250);
   },900);
