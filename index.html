@@ -18,18 +18,7 @@ body{
   transition:background 1s ease;
 }
 
-/* ===== TITRES ===== */
-#topTitle{
-  position:fixed;
-  top:35px;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:28px;
-  font-weight:bold;
-  color:#ff2f7d;
-  z-index:20;
-}
-
+/* ===== TITRE FIXE ===== */
 #title{
   position:fixed;
   top:95px;
@@ -46,7 +35,7 @@ body{
 .card{
   display:none;
   background:#ffd6e8;
-  padding:25px;
+  padding:30px 25px;
   border-radius:22px;
   width:90%;
   max-width:360px;
@@ -54,6 +43,14 @@ body{
   box-shadow:0 10px 30px rgba(0,0,0,.3);
   position:relative;
   z-index:5;
+}
+
+/* ===== TITRE INTRO DANS LA CARTE ===== */
+.introTitle{
+  font-size:30px;
+  font-weight:900;
+  margin-bottom:15px;
+  color:#000;
 }
 
 /* ===== ENVELOPPE INTRO ===== */
@@ -212,10 +209,10 @@ button{
 
 <body>
 
-<div id="topTitle">Pour Chaimaa ❤️</div>
 <div id="title">À ma femme</div>
 
 <div class="card" id="intro">
+  <div class="introTitle">Pour Chaimaa ❤️</div>
   <p>Clique sur l’enveloppe</p>
   <img src="IMG_5431.jpeg" class="envelopeIntro" onclick="openIntro()">
 </div>
@@ -297,7 +294,6 @@ function spawnHackChaos(){
 
 function startHack(){
   title.style.display="none";
-  topTitle.style.display="none";
   hack.style.display="block";
   chaos=setInterval(spawnHackChaos,70);
 
@@ -359,3 +355,4 @@ function moveNo(){
 
 </body>
 </html>
+
