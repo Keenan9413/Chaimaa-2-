@@ -35,7 +35,7 @@ body{
 .card{
   display:none;
   background:#ffd6e8;
-  padding:30px 25px;
+  padding:25px;
   border-radius:22px;
   width:90%;
   max-width:360px;
@@ -43,6 +43,7 @@ body{
   box-shadow:0 10px 30px rgba(0,0,0,.3);
   position:relative;
   z-index:5;
+  overflow:hidden;
 }
 
 /* ===== TITRE INTRO ===== */
@@ -112,6 +113,7 @@ button{
   height:14px;
   background:#330000;
   border-radius:10px;
+  margin-top:15px;
   overflow:hidden;
 }
 .bar{
@@ -120,7 +122,16 @@ button{
   background:red;
   transition:width .7s linear;
 }
-
+.hackProgressText{
+  margin-top:10px;
+  font-size:13px;
+  font-weight:bold;
+  animation:flash .6s infinite;
+}
+@keyframes flash{
+  0%,100%{opacity:1;}
+  50%{opacity:0;}
+}
 /* ===== CHAOS ===== */
 .hackChaos{
   position:fixed;
