@@ -18,13 +18,13 @@ body{
   transition:background 1s ease;
 }
 
-/* ===== TITRE ===== */
+/* ===== TITRE FIXE ===== */
 #title{
   position:fixed;
-  top:110px;
+  top:95px;
   left:50%;
   transform:translateX(-50%);
-  font-size:32px;
+  font-size:30px;
   font-weight:900;
   color:#c00000;
   text-decoration:underline;
@@ -35,7 +35,7 @@ body{
 .card{
   display:none;
   background:#ffd6e8;
-  padding:25px;
+  padding:30px 25px;
   border-radius:22px;
   width:90%;
   max-width:360px;
@@ -45,8 +45,16 @@ body{
   z-index:5;
 }
 
-/* ===== ENVELOPPE ===== */
-.envelope{
+/* ===== TITRE INTRO ===== */
+.introTitle{
+  font-size:30px;
+  font-weight:900;
+  margin-bottom:15px;
+  color:#000;
+}
+
+/* ===== ENVELOPPE INTRO ===== */
+.envelopeIntro{
   width:200px;
   cursor:pointer;
   animation:bounce 1.4s infinite;
@@ -138,28 +146,26 @@ button{
   z-index:10;
 }
 
-/* CONTENEUR ENVELOPPE */
 .finalBox{
   position:relative;
-  width:220px;
-  height:180px;
+  cursor:pointer;
 }
 
-/* ===== FEUILLE ===== */
+/* ===== FEUILLE (CORRIGÉE) ===== */
 .paper{
   position:absolute;
   width:200px;
   height:140px;
   background:#ffe4ef;
+  top:30px;
   left:10px;
-  bottom:40px;
   border-radius:10px;
   opacity:0;
   transform:translateY(60px);
   box-shadow:0 10px 25px rgba(0,0,0,.25);
   padding:18px;
   text-align:center;
-  z-index:1;
+  z-index:2;
 }
 
 .paper h1{
@@ -207,9 +213,9 @@ button{
 
 <!-- INTRO -->
 <div class="card" id="intro">
-  <h2>Pour Chaimaa ❤️</h2>
+  <div class="introTitle">Pour Chaimaa ❤️</div>
   <p>Clique sur l’enveloppe</p>
-  <img src="IMG_5431.jpeg" class="envelope" onclick="openIntro()">
+  <img src="IMG_5431.jpeg" class="envelopeIntro" onclick="openIntro()">
 </div>
 
 <!-- QUESTIONS -->
@@ -228,14 +234,14 @@ button{
   </div>
 </div>
 
-<!-- FINAL -->
+<!-- FINAL (ENVELOPPE + FEUILLE PARFAITEMENT LIÉES) -->
 <div id="final">
   <div class="finalBox" onclick="openFinal()">
+    <img src="IMG_5431.jpeg" width="220">
     <div class="paper" id="paper">
       <h1 id="typeText"></h1><span class="cursor" id="cursor"></span>
       <p id="subText">Joyeuse Saint Chaimaa Beauté 💖</p>
     </div>
-    <img src="IMG_5431.jpeg" width="220" style="position:relative;z-index:2;">
   </div>
 </div>
 
@@ -263,8 +269,6 @@ function spawnQuestionEmoji(){
   e.className="qEmoji";
   e.innerHTML=emojis[q];
   e.style.left=Math.random()*80+"%";
-  e.style.bottom="10px";
-  e.style.fontSize=22+Math.random()*22+"px";
   question.appendChild(e);
   setTimeout(()=>e.remove(),3000);
 }
@@ -314,7 +318,7 @@ function startHack(){
 
 function openFinal(){
   paper.style.opacity=1;
-  paper.style.transform="translateY(-80px)";
+  paper.style.transform="translateY(-40px)";
   paper.style.transition="all 1s ease";
 
   setTimeout(()=>{
@@ -356,3 +360,4 @@ function moveNo(){
 
 </body>
 </html>
+
