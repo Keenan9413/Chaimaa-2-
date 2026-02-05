@@ -52,7 +52,7 @@ body{
   margin-bottom:15px;
 }
 
-/* ===== ENVELOPPE (INTRO + FINAL) ===== */
+/* ===== ENVELOPPE ===== */
 .envelope{
   width:200px;
   cursor:pointer;
@@ -87,7 +87,7 @@ button{
   to{transform:translateY(-80px);opacity:0}
 }
 
-/* ===== HACK (VERSION ORIGINALE) ===== */
+/* ===== HACK ===== */
 #hack{
   background:black;
   color:red;
@@ -161,19 +161,19 @@ button{
   cursor:pointer;
 }
 
-/* ===== FEUILLE ===== */
+/* ===== FEUILLE (TAILLE AJUSTÉE) ===== */
 .paper{
   position:absolute;
-  width:200px;
-  height:140px;
+  width:180px;              /* 👈 ajusté */
+  height:125px;             /* 👈 plus réaliste */
   background:#ffe4ef;
-  top:30px;
-  left:10px;
+  top:28px;
+  left:50%;
+  transform:translateX(-50%) translateY(60px);
   border-radius:10px;
   opacity:0;
-  transform:translateY(60px);
   box-shadow:0 10px 25px rgba(0,0,0,.25);
-  padding:18px;
+  padding:16px;
   text-align:center;
   z-index:2;
 }
@@ -221,21 +221,18 @@ button{
 
 <div id="title">À ma femme</div>
 
-<!-- INTRO -->
 <div class="card" id="intro">
   <div class="introTitle">Pour Chaimaa ❤️</div>
   <p>Clique sur l’enveloppe</p>
   <img src="IMG_5431.jpeg" class="envelope" onclick="openIntro()">
 </div>
 
-<!-- QUESTIONS -->
 <div class="card" id="question">
   <h1 id="qText">Veux-tu être ma future femme ? 💍</h1>
   <button id="yes" onclick="nextQuestion()">Oui ❤️</button>
   <button id="no" onmouseover="moveNo()">Non 💔</button>
 </div>
 
-<!-- HACK -->
 <div class="card" id="hack">
   <div class="hackBox">
     <h2 id="hackTop">TRÈS BIEN</h2>
@@ -245,7 +242,6 @@ button{
   </div>
 </div>
 
-<!-- FINAL -->
 <div id="final">
   <div class="finalBox" onclick="openFinal()">
     <img src="IMG_5431.jpeg" class="envelope">
@@ -329,7 +325,7 @@ function startHack(){
 
 function openFinal(){
   paper.style.opacity=1;
-  paper.style.transform="translateY(-40px)";
+  paper.style.transform="translateX(-50%) translateY(-40px)";
   paper.style.transition="all 1s ease";
 
   setTimeout(()=>{
