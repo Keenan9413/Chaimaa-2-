@@ -9,9 +9,6 @@
 body{
   margin:0;
   height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
   background:linear-gradient(135deg,#4CAF50,#2e7d32);
   font-family:Arial,sans-serif;
   overflow:hidden;
@@ -43,7 +40,7 @@ body{
   to{transform:translateY(-120px);opacity:0;}
 }
 
-/* CARTE */
+/* INTRO */
 .card{
   display:none;
   background:white;
@@ -52,14 +49,24 @@ body{
   width:90%;
   max-width:360px;
   text-align:center;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
 }
 
-/* 🔥 FIX PRINCIPAL */
+/* SCENE FULL */
 #scene{
   position:fixed;
   inset:0;
   display:none;
-  z-index:5;
+}
+
+/* CONTENU SCROLLABLE */
+.content{
+  max-height:80vh;
+  overflow-y:auto;
+  padding:20px;
 }
 
 /* ENVELOPPE */
@@ -101,11 +108,6 @@ button{
 
 <script>
 
-window.onload=()=>{
-  intro.style.display="block";
-  startHearts();
-};
-
 /* COEURS */
 let heartInterval;
 function spawnHeart(){
@@ -124,6 +126,11 @@ function stopHearts(){
   clearInterval(heartInterval);
 }
 
+window.onload=()=>{
+  intro.style.display="block";
+  startHearts();
+};
+
 /* START */
 function start(){
   intro.style.display="none";
@@ -136,44 +143,67 @@ function start(){
 function showScene1(){
   scene.style.display="block";
   scene.innerHTML=`
-    <div style="background:white;padding:25px;border-radius:20px;max-width:360px;margin:auto;margin-top:100px;text-align:center;">
-      <img src="IMG_3018.jpeg" style="width:100%;border-radius:15px;">
-      <h2>Tu te souviens de cette journée ?</h2>
-      <button class="yes" onclick="scene1Oui()">Oui ❤️</button>
-      <button class="no" onmouseover="moveNo(this)">Non 💔</button>
-    </div>
-  `;
+  <div style="background:white;padding:25px;border-radius:20px;max-width:360px;margin:auto;margin-top:80px;text-align:center;">
+    <img src="IMG_3018.jpeg" style="width:100%;border-radius:15px;">
+    <h2>Tu te souviens de cette journée ?</h2>
+    <button class="yes" onclick="scene1Oui()">Oui ❤️</button>
+    <button class="no" onmouseover="moveNo(this)">Non 💔</button>
+  </div>`;
 }
 
 function scene1Oui(){
   scene.innerHTML=`
-    <div style="height:100vh;background:url('IMG_3018.jpeg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:white;background-color:rgba(0,0,0,0.5);background-blend-mode:darken;padding:20px;">
-      <p>Je t’avais donné rendez-vous pour faire de la grande roue...</p>
+  <div style="height:100vh;background:url('IMG_3018.jpeg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:white;background-color:rgba(0,0,0,0.5);background-blend-mode:darken;">
+    <div class="content">
+      <p>Je t’avais donné rendez-vous pour faire de la grande roue, t’en avais jamais fait ensuite on est allé au musée et ce jour là je m'en souviens t'étais fatigué et t'en avais marre d'être debout. Cette journée était vraiment cool beauté</p>
       <button class="suite" onclick="showScene2()">Suite ➡️</button>
     </div>
-  `;
+  </div>`;
 }
 
 /* SCENE 2 */
 function showScene2(){
   scene.innerHTML=`
-    <div style="background:white;padding:25px;border-radius:20px;max-width:360px;margin:auto;margin-top:100px;text-align:center;">
-      <img src="IMG_7864.jpeg" style="width:100%;border-radius:15px;">
-      <h2>Cette journée à gravée n’est-ce pas ?</h2>
-      <button class="yes" onclick="scene2Oui()">Oui ❤️</button>
-      <button class="no" onmouseover="moveNo(this)">Non 💔</button>
-    </div>
-  `;
+  <div style="background:white;padding:25px;border-radius:20px;max-width:360px;margin:auto;margin-top:80px;text-align:center;">
+    <img src="IMG_7864.jpeg" style="width:100%;border-radius:15px;">
+    <h2>Cette journée à gravée n’est-ce pas ?</h2>
+    <button class="yes" onclick="scene2Oui()">Oui ❤️</button>
+    <button class="no" onmouseover="moveNo(this)">Non 💔</button>
+  </div>`;
 }
 
 function scene2Oui(){
   scene.innerHTML=`
-    <div style="height:100vh;background:url('IMG_7864.jpeg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:white;background-color:rgba(0,0,0,0.6);background-blend-mode:darken;padding:20px;">
-      <p>Ce jour là ta mère n’était pas forcément d’accord...</p>
-      <button class="suite" onclick="alert('suite suivante à brancher')">Suite ➡️</button>
+  <div style="height:100vh;background:url('IMG_7864.jpeg') center/cover no-repeat;display:flex;justify-content:center;align-items:center;text-align:center;color:white;background-color:rgba(0,0,0,0.6);background-blend-mode:darken;">
+    <div class="content">
+      <p>Ce jour là ta mère n’était pas forcément d’accord pour que tu sortes aussi tard avec moi et heureusement que ton père était là… C’était mémorable, t’as tenue, ton parfum, tes cheveux fin tout était magique je t’ai emmené au restaurant et je t’ai fait cette surprise de revenir avec pleins de cadeaux car tu le mérites. T’es cette femme que je veux gâter constamment pour te faire sourire et te rendre heureuse</p>
+      <button class="suite" onclick="showScene3()">Suite ➡️</button>
     </div>
-  `;
+  </div>`;
 }
+
+/* SCENE 3 */
+function showScene3(){
+  scene.innerHTML=`
+  <div style="background:white;padding:25px;border-radius:20px;max-width:360px;margin:auto;margin-top:80px;text-align:center;">
+    <img src="IMG_3947.jpeg" style="width:100%;border-radius:15px;">
+    <h2>Le meilleur Aïd</h2>
+    <button class="yes" onclick="scene3Oui()">Oui ❤️</button>
+    <button class="no" onmouseover="moveNo(this)">Non 💔</button>
+  </div>`;
+}
+
+function scene3Oui(){
+  scene.innerHTML=`
+  <div style="height:100vh;background:url('IMG_3947.jpeg') center/cover no-repeat;display:flex;justify-content:center;align-items:center;text-align:center;color:white;background-color:rgba(0,0,0,0.6);background-blend-mode:darken;">
+    <div class="content">
+      <p>C’était mon meilleur Aïd je t’avais ramené des fleurs pour toi et ta mère ainsi que des fleurs en forme de voile car ta mère est voilée et pour que tu puisses prier avec le tien qui est vert, ta couleur préférée. Chaque détail te concernant reste gravé dans ma mémoire sache le, tout ce que tu me dis je le retiens et je le réutilise par la suite dans le futur pour te montrer que je suis attentif à chaque fois que tu me parles et que je t’écoute car ça m’intéresse. Et pour le prochain ramadan on sera ensemble et plus chacun de notre côté comme les précédent car nous serons mariés</p>
+      <button class="suite" onclick="showScene4()">Suite ➡️</button>
+    </div>
+  </div>`;
+}
+
+/* etc... tu peux continuer pareil */
 
 /* NON QUI FUIT */
 function moveNo(btn){
