@@ -15,10 +15,9 @@ body{
   background:linear-gradient(135deg,#4CAF50,#2e7d32);
   font-family:Arial,sans-serif;
   overflow:hidden;
-  transition:background 1s ease;
 }
 
-/* ===== TITRE ===== */
+/* TITRE */
 #title{
   position:fixed;
   top:95px;
@@ -31,39 +30,29 @@ body{
   z-index:20;
 }
 
-/* ===== CARTES ===== */
+/* CARTE */
 .card{
   display:none;
-  background:#ffffff;
+  background:white;
   padding:25px;
   border-radius:22px;
   width:90%;
   max-width:360px;
   text-align:center;
   box-shadow:0 10px 30px rgba(0,0,0,.3);
-  position:relative;
-  z-index:5;
 }
 
-/* ===== INTRO ===== */
-.introTitle{
-  font-size:30px;
-  font-weight:900;
-  margin-bottom:15px;
-}
-
-/* ===== ENVELOPPE ===== */
+/* ENVELOPPE */
 .envelope{
   width:200px;
   cursor:pointer;
   animation:bounce 1.4s infinite;
 }
 @keyframes bounce{
-  0%,100%{transform:translateY(0);}
   50%{transform:translateY(-10px);}
 }
 
-/* ===== BOUTONS ===== */
+/* BOUTONS */
 button{
   padding:12px 22px;
   border:none;
@@ -72,134 +61,118 @@ button{
   cursor:pointer;
   margin:10px;
 }
-#yes{background:#4CAF50;color:white;}
-#no{background:#ccc;position:absolute}
-#suite{background:#2196F3;color:white;}
+.yes{background:#4CAF50;color:white;}
+.no{background:#ccc;position:relative;}
+.suite{background:#2196F3;color:white;}
 
 </style>
 </head>
 
 <body>
 
-<div id="title">À mon amoureuse </div>
+<div id="title">À mon amoureuse</div>
 
 <div class="card" id="intro">
-  <div class="introTitle">Mon amour ❤️</div>
+  <h2>Mon amour ❤️</h2>
   <p>Clique sur l’enveloppe</p>
-  <img src="IMG_5431.jpeg" class="envelope" onclick="openIntro()">
+  <img src="IMG_5431.jpeg" class="envelope" onclick="start()">
 </div>
 
-<!-- ETAPE 1 -->
-<div class="card" id="question">
-  <img src="IMG_3018.jpeg" style="width:100%;border-radius:15px;margin-bottom:15px;">
-  
-  <h2>Tu te souviens de cette journée ?</h2>
-
-  <button id="yes" onclick="reponseOui()">Oui ❤️</button>
-  <button id="no" onmouseover="moveNo()">Non 💔</button>
-</div>
+<div class="card" id="scene"></div>
 
 <script>
 
 window.onload=()=>intro.style.display="block";
 
-function openIntro(){
+function start(){
   intro.style.display="none";
-  question.style.display="block";
-  document.body.style.background = "#000";
+  title.style.display="none"; // ❌ cache le titre
+  showScene1();
 }
 
-/* ===== ETAPE 1 -> TEXTE + SUITE ===== */
-function reponseOui(){
-  document.body.innerHTML = `
-    <div style="
-      height:100vh;
-      background:url('IMG_3018.jpeg') center/cover no-repeat;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      color:white;
-      padding:20px;
-      font-size:20px;
-      font-weight:bold;
-      background-color:rgba(0,0,0,0.5);
-      background-blend-mode:darken;
-    ">
-      <p>
-        Je t’avais donné rendez-vous pour faire de la grande roue, t’en avais jamais fait ensuite on est allé au musée. Cette journée était cool
-      </p>
+/* ===== SCENE 1 ===== */
+function showScene1(){
+  scene.style.display="block";
+  scene.innerHTML=`
+    <img src="IMG_3018.jpeg" style="width:100%;border-radius:15px;">
+    <h2>Tu te souviens de cette journée ?</h2>
+    <button class="yes" onclick="scene1Oui()">Oui ❤️</button>
+    <button class="no" onmouseover="moveNo(this)">Non 💔</button>
+  `;
+}
 
-      <button id="suite" onclick="suite1()">Suite ➡️</button>
+function scene1Oui(){
+  scene.innerHTML=`
+    <div style="color:white;height:100vh;background:url('IMG_3018.jpeg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background-color:rgba(0,0,0,0.5);background-blend-mode:darken;">
+      <p>Je t’avais donné rendez-vous pour faire de la grande roue, t’en avais jamais fait ensuite on est allé au musée. Cette journée était cool</p>
+      <button class="suite" onclick="showScene2()">Suite ➡️</button>
     </div>
   `;
 }
 
-/* ===== ETAPE 2 ===== */
-function suite1(){
-  document.body.innerHTML = `
-    <div style="
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      background:#000;
-    ">
-      <div style="
-        background:white;
-        padding:20px;
-        border-radius:20px;
-        text-align:center;
-        max-width:350px;
-      ">
-        <img src="IMG_7864.jpeg" style="width:100%;border-radius:15px;margin-bottom:15px;">
-        
-        <h2>Cette journée à gravée n’est-ce pas ?</h2>
+/* ===== SCENE 2 ===== */
+function showScene2(){
+  scene.innerHTML=`
+    <img src="IMG_7864.jpeg" style="width:100%;border-radius:15px;">
+    <h2>Cette journée à gravée n’est-ce pas ?</h2>
+    <button class="yes" onclick="scene2Oui()">Oui ❤️</button>
+    <button class="no" onmouseover="moveNo(this)">Non 💔</button>
+  `;
+}
 
-        <button onclick="suiteOui()">Oui ❤️</button>
-        <button id="no" onmouseover="moveNo()">Non 💔</button>
-      </div>
+function scene2Oui(){
+  scene.innerHTML=`
+    <div style="color:white;height:100vh;background:url('IMG_7864.jpeg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background-color:rgba(0,0,0,0.6);background-blend-mode:darken;">
+      <p>Ce jour là ta mère n’était pas forcément d’accord... T’es cette femme que je veux gâter constamment pour te faire sourire et te rendre heureuse.</p>
+      <button class="suite" onclick="showScene3()">Suite ➡️</button>
     </div>
   `;
 }
 
-/* ===== ETAPE 3 ===== */
-function suiteOui(){
-  document.body.innerHTML = `
-    <div style="
-      height:100vh;
-      background:url('IMG_7864.jpeg') center/cover no-repeat;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      color:white;
-      padding:20px;
-      font-size:18px;
-      font-weight:bold;
-      background-color:rgba(0,0,0,0.6);
-      background-blend-mode:darken;
-    ">
-      <p>
-        Ce jour là ta mère n’était pas forcément d’accord pour que tu sortes aussi tard avec moi et heureusement que ton père était là… 
-        C’était mémorable, t’as tenue, ton parfum, tes cheveux fin tout était magique je t’ai emmené au restaurant et je t’ai fait cette surprise 
-        de revenir avec pleins de cadeaux car tu le mérites. T’es cette femme que je veux gâter constamment pour te faire sourire et te rendre heureuse.
-      </p>
+/* ===== SCENE 3 (AID) ===== */
+function showScene3(){
+  scene.innerHTML=`
+    <img src="IMG_3947.jpeg" style="width:100%;border-radius:15px;">
+    <h2>Le meilleur Aïd</h2>
+    <button class="yes" onclick="scene3Oui()">Oui ❤️</button>
+    <button class="no" onmouseover="moveNo(this)">Non 💔</button>
+  `;
+}
 
-      <button id="suite" onclick="alert('On continue après 😏')">Suite ➡️</button>
+function scene3Oui(){
+  scene.innerHTML=`
+    <div style="color:white;height:100vh;background:url('IMG_3947.jpeg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background-color:rgba(0,0,0,0.6);background-blend-mode:darken;">
+      <p>
+      C’était mon meilleur Aïd... tout ce que tu me dis je le retiens et je le réutilise pour te montrer que je t’écoute...
+      </p>
+      <button class="suite" onclick="showScene4()">Suite ➡️</button>
+    </div>
+  `;
+}
+
+/* ===== SCENE 4 (CINEMA) ===== */
+function showScene4(){
+  scene.innerHTML=`
+    <img src="IMG_8328.jpeg" style="width:100%;border-radius:15px;">
+    <h2>Cette journée au cinéma…</h2>
+    <button class="yes" onclick="scene4Oui()">Oui ❤️</button>
+    <button class="no" onmouseover="moveNo(this)">Non 💔</button>
+  `;
+}
+
+function scene4Oui(){
+  scene.innerHTML=`
+    <div style="color:white;height:100vh;background:url('IMG_8328.jpeg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background-color:rgba(0,0,0,0.6);background-blend-mode:darken;">
+      <p>
+      Ce jour là je t’avais emmené au cinéma voir le marsupilami... c’est toi, ma femme qui faisait toute la différence
+      </p>
     </div>
   `;
 }
 
 /* ===== BOUTON NON QUI FUIT ===== */
-function moveNo(){
-  const noBtn = document.getElementById("no");
-  if(noBtn){
-    noBtn.style.position="relative";
-    noBtn.style.transform=`translate(${Math.random()*120-60}px,${Math.random()*80-40}px)`;
-  }
+function moveNo(btn){
+  btn.style.transform=`translate(${Math.random()*120-60}px,${Math.random()*80-40}px)`;
 }
 
 </script>
