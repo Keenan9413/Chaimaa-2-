@@ -271,6 +271,28 @@ function scene5Oui(){
 /* ===== SCENE 6 ===== */
 function showScene6(){
   scene.innerHTML=`
+    <img src="IMG_3985.jpeg" style="width:100%;border-radius:15px;">
+    <h2>je te laisse relire ton poème que tu m’as fait pour la Saint Chaimaa et que tu vois à quel point tu m’aimes et surtout à quel point mon amour pour toi et sincère et pure car je ferais tout pour toi</h2>
+    <button class="yes" onclick="scene6Oui()">Oui ❤️</button>
+    <button class="no" onmouseover="moveNo(this)">Non 💔</button>
+  `;
+  startSceneHearts();
+}
+  
+function scene6Oui(){
+  stopSceneHearts();
+  scene.innerHTML=`
+    <img src="IMG_3985.jpeg" style="width:100%;border-radius:15px;">
+    <button class="suite" onclick="showScene7()">Suite ➡️</button>
+    </div>
+  `;
+}
+
+  
+  
+/* ===== SCENE 7 ===== */
+function showScene7(){
+  scene.innerHTML=`
     <img src="IMG_1992.jpeg" style="width:100%;border-radius:15px;">
     <h2>Journée mémorable et symbolique</h2>
     <button class="yes" onclick="scene6Oui()">Oui ❤️</button>
@@ -279,18 +301,18 @@ function showScene6(){
   startSceneHearts();
 }
 
-function scene6Oui(){
+function scene7Oui(){
   stopSceneHearts();
   scene.innerHTML=`
     <div style="color:white;height:100vh;background:url('IMG_1992.jpeg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background-color:rgba(0,0,0,0.6);background-blend-mode:darken;">
       <p>Ce jour là j’étais tellement reconnaissant que t’ai accepté de m’accompagner alors qu’il y avait ma mère t’aurais pu refuser et au final t’as accepté ce qui montre l’importance que j’ai à tes yeux. C’était tellement magique de pouvoir vivre cette journée tous les trois tu n’as pas idée et j’espère vivre cette même soirée durant ta remise. Ça a été une journée hyper symbolique, tu as rencontré ma mère, la première et dernière fille qui la rencontrera. Tout s’est bien passé entre vous Al hamdoulillah et tu continueras à la voir parce que je ne te lâcherai pas, tu es ma femme, ma moitié, mon tout et jamais je ne te laisserai t'en aller je t'aime trop pour ça. Sache que ma mère est tellement contente qu’on soit ensemble qu’elle à parlé à tout le monde, elle l'a annoncé à nos deux banquières pour notre mariage NOS BANQUIÈRES elles ont 50 ans et elles savent notre vie alors que je parle pas de base, c’est pour te dire à quel point elle est enthousiaste pour nous deux</p>
-      <button class="suite" onclick="showScene7()">Suite ➡️</button>
+      <button class="suite" onclick="showScene7()">Suite ➡️</button
     </div>
   `;
 }
 
-/* ===== SCENE 7 ===== */
-function showScene7(){
+/* ===== SCENE 8 ===== */
+function showScene8(){
   scene.innerHTML=`
     <img src="IMG_8560.jpeg" style="width:100%;border-radius:15px;">
     <h2>Pour finir</h2>
@@ -298,7 +320,7 @@ function showScene7(){
   `;
 }
 
-function scene7Oui(){
+function scene8Oui(){
   stopSceneHearts();
   scene.innerHTML=`
     <div style="color:white;height:100vh;background:url('IMG_8560.jpeg') center/cover no-repeat;display:flex;justify-content:center;align-items:center;text-align:center;background-color:rgba(0,0,0,0.7);background-blend-mode:darken;">
