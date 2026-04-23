@@ -12,7 +12,7 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(135deg,#4CAF50,#2e7d32); /* ✅ VERT */
+  background:linear-gradient(135deg,#4CAF50,#2e7d32);
   font-family:Arial,sans-serif;
   overflow:hidden;
   transition:background 1s ease;
@@ -74,6 +74,7 @@ button{
 }
 #yes{background:#4CAF50;color:white;}
 #no{background:#ccc;position:absolute}
+#suite{background:#2196F3;color:white;}
 
 </style>
 </head>
@@ -88,7 +89,7 @@ button{
   <img src="IMG_5431.jpeg" class="envelope" onclick="openIntro()">
 </div>
 
-<!-- ✅ NOUVELLE SECTION -->
+<!-- ETAPE 1 -->
 <div class="card" id="question">
   <img src="IMG_3018.jpeg" style="width:100%;border-radius:15px;margin-bottom:15px;">
   
@@ -108,12 +109,14 @@ function openIntro(){
   document.body.style.background = "#000";
 }
 
+/* ===== ETAPE 1 -> TEXTE + SUITE ===== */
 function reponseOui(){
   document.body.innerHTML = `
     <div style="
       height:100vh;
       background:url('IMG_3018.jpeg') center/cover no-repeat;
       display:flex;
+      flex-direction:column;
       justify-content:center;
       align-items:center;
       text-align:center;
@@ -124,13 +127,79 @@ function reponseOui(){
       background-color:rgba(0,0,0,0.5);
       background-blend-mode:darken;
     ">
-      Je t’avais donné rendez-vous pour faire de la grande roue, t’en avais jamais fait ensuite on est allé au musée. Cette journée était cool
+      <p>
+        Je t’avais donné rendez-vous pour faire de la grande roue, t’en avais jamais fait ensuite on est allé au musée. Cette journée était cool
+      </p>
+
+      <button id="suite" onclick="suite1()">Suite ➡️</button>
     </div>
   `;
 }
 
+/* ===== ETAPE 2 ===== */
+function suite1(){
+  document.body.innerHTML = `
+    <div style="
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:#000;
+    ">
+      <div style="
+        background:white;
+        padding:20px;
+        border-radius:20px;
+        text-align:center;
+        max-width:350px;
+      ">
+        <img src="IMG_7864.jpeg" style="width:100%;border-radius:15px;margin-bottom:15px;">
+        
+        <h2>Cette journée à gravée n’est-ce pas ?</h2>
+
+        <button onclick="suiteOui()">Oui ❤️</button>
+        <button id="no" onmouseover="moveNo()">Non 💔</button>
+      </div>
+    </div>
+  `;
+}
+
+/* ===== ETAPE 3 ===== */
+function suiteOui(){
+  document.body.innerHTML = `
+    <div style="
+      height:100vh;
+      background:url('IMG_7864.jpeg') center/cover no-repeat;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      color:white;
+      padding:20px;
+      font-size:18px;
+      font-weight:bold;
+      background-color:rgba(0,0,0,0.6);
+      background-blend-mode:darken;
+    ">
+      <p>
+        Ce jour là ta mère n’était pas forcément d’accord pour que tu sortes aussi tard avec moi et heureusement que ton père était là… 
+        C’était mémorable, t’as tenue, ton parfum, tes cheveux fin tout était magique je t’ai emmené au restaurant et je t’ai fait cette surprise 
+        de revenir avec pleins de cadeaux car tu le mérites. T’es cette femme que je veux gâter constamment pour te faire sourire et te rendre heureuse.
+      </p>
+
+      <button id="suite" onclick="alert('On continue après 😏')">Suite ➡️</button>
+    </div>
+  `;
+}
+
+/* ===== BOUTON NON QUI FUIT ===== */
 function moveNo(){
-  no.style.transform=`translate(${Math.random()*120-60}px,${Math.random()*80-40}px)`;
+  const noBtn = document.getElementById("no");
+  if(noBtn){
+    noBtn.style.position="relative";
+    noBtn.style.transform=`translate(${Math.random()*120-60}px,${Math.random()*80-40}px)`;
+  }
 }
 
 </script>
