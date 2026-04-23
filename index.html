@@ -17,7 +17,6 @@ body{
   overflow:hidden;
 }
 
-/* TITRE */
 #title{
   position:fixed;
   top:95px;
@@ -30,7 +29,6 @@ body{
   z-index:20;
 }
 
-/* CARTE */
 .card{
   display:none;
   background:white;
@@ -42,7 +40,6 @@ body{
   box-shadow:0 10px 30px rgba(0,0,0,.3);
 }
 
-/* ENVELOPPE */
 .envelope{
   width:200px;
   cursor:pointer;
@@ -52,7 +49,6 @@ body{
   50%{transform:translateY(-10px);}
 }
 
-/* BOUTONS */
 button{
   padding:12px 22px;
   border:none;
@@ -64,7 +60,6 @@ button{
 .yes{background:#4CAF50;color:white;}
 .no{background:#ccc;position:relative;}
 .suite{background:#2196F3;color:white;}
-
 </style>
 </head>
 
@@ -104,9 +99,7 @@ function showScene1(){
 function scene1Oui(){
   scene.innerHTML=`
     <div style="color:white;height:100vh;background:url('IMG_3018.jpeg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background-color:rgba(0,0,0,0.5);background-blend-mode:darken;">
-      <p>
-      Je t’avais donné rendez-vous pour faire de la grande roue, t’en avais jamais fait ensuite on est allé au musée. Cette journée était cool
-      </p>
+      <p>Je t’avais donné rendez-vous pour faire de la grande roue, t’en avais jamais fait ensuite on est allé au musée. Cette journée était cool</p>
       <button class="suite" onclick="showScene2()">Suite ➡️</button>
     </div>
   `;
@@ -125,15 +118,13 @@ function showScene2(){
 function scene2Oui(){
   scene.innerHTML=`
     <div style="color:white;height:100vh;background:url('IMG_7864.jpeg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background-color:rgba(0,0,0,0.6);background-blend-mode:darken;">
-      <p>
-      Ce jour là ta mère n’était pas forcément d’accord pour que tu sortes aussi tard avec moi et heureusement que ton père était là… C’était mémorable, t’as tenue, ton parfum, tes cheveux fin tout était magique je t’ai emmené au restaurant et je t’ai fait cette surprise de revenir avec pleins de cadeaux car tu le mérites. T’es cette femme que je veux gâter constamment pour te faire sourire et te rendre heureuse.
-      </p>
+      <p>Ce jour là ta mère n’était pas forcément d’accord pour que tu sortes aussi tard avec moi et heureusement que ton père était là… C’était mémorable, t’as tenue, ton parfum, tes cheveux fin tout était magique je t’ai emmené au restaurant et je t’ai fait cette surprise de revenir avec pleins de cadeaux car tu le mérites. T’es cette femme que je veux gâter constamment pour te faire sourire et te rendre heureuse.</p>
       <button class="suite" onclick="showScene3()">Suite ➡️</button>
     </div>
   `;
 }
 
-/* ===== SCENE 3 (AID) ===== */
+/* ===== SCENE 3 AID ===== */
 function showScene3(){
   scene.innerHTML=`
     <img src="IMG_3947.jpeg" style="width:100%;border-radius:15px;">
@@ -146,15 +137,13 @@ function showScene3(){
 function scene3Oui(){
   scene.innerHTML=`
     <div style="color:white;height:100vh;background:url('IMG_3947.jpeg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background-color:rgba(0,0,0,0.6);background-blend-mode:darken;">
-      <p>
-      C’était mon meilleur Aïd je t’avais ramené des fleurs pour toi et ta mère ainsi que des fleurs en forme de voile car ta mère est voilée et pour que tu puisses prier avec le tien qui est vert, ta couleur préférée. Chaque détail te concernant reste gravé dans ma mémoire sache le, tout ce que tu me dis je le retiens et je le réutilise par la suite dans le futur pour te montrer que je suis attentif à chaque fois que tu me parles et que je t’écoute car ça m’intéresse. Et pour le prochain ramadan on sera ensemble et plus chacun de notre côté comme les précédent car nous serons mariés
-      </p>
+      <p>C’était mon meilleur Aïd je t’avais ramené des fleurs pour toi et ta mère ainsi que des fleurs en forme de voile car ta mère est voilée et pour que tu puisses prier avec le tien qui est vert, ta couleur préférée. Chaque détail te concernant reste gravé dans ma mémoire sache le, tout ce que tu me dis je le retiens et je le réutilise par la suite dans le futur pour te montrer que je suis attentif à chaque fois que tu me parles et que je t’écoute car ça m’intéresse. Et pour le prochain ramadan on sera ensemble et plus chacun de notre côté comme les précédent car nous serons mariés</p>
       <button class="suite" onclick="showScene4()">Suite ➡️</button>
     </div>
   `;
 }
 
-/* ===== SCENE 4 (CINEMA) ===== */
+/* ===== SCENE 4 CINEMA ===== */
 function showScene4(){
   scene.innerHTML=`
     <img src="IMG_8328.jpeg" style="width:100%;border-radius:15px;">
@@ -167,14 +156,68 @@ function showScene4(){
 function scene4Oui(){
   scene.innerHTML=`
     <div style="color:white;height:100vh;background:url('IMG_8328.jpeg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background-color:rgba(0,0,0,0.6);background-blend-mode:darken;">
-      <p>
-      Ce jour là je t’avais emmené au cinéma voir le marsupilami, je t’avais pris une rose comme signe d’attention et j’ai adoré cette soirée surtout quand tu m’avais pris les bras WILIWILIWILI comment c’était kiffant idem pour les photos c’était incroyable les souvenirs qu’on a créé alors que pourtant c’était qu’une journée banale au cinéma mais c’est toi, ma femme qui faisait toute cette différence. Ce soir là on a découvert tout les deux qu'on voulait donner le même prénom à nos enfants la probabilité était si mince et ‎الله nous a donné un signe tellement distinct qu'on ne peut l'ignorer idem pour les autres fois c'était toujours des signes de Dieu pour nous dire que nous sommes fait pour rester ensemble  
-      </p>
+      <p>Ce jour là je t’avais emmené au cinéma voir le marsupilami, je t’avais pris une rose comme signe d’attention et j’ai adoré cette soirée surtout quand tu m’avais pris les bras WILIWILIWILI comment c’était kiffant idem pour les photos c’était incroyable les souvenirs qu’on a créé alors que pourtant c’était qu’une journée banale au cinéma mais c’est toi, ma femme qui faisait toute cette différence. Ce soir là on a découvert tout les deux qu'on voulait donner le même prénom à nos enfants la probabilité était si mince et ‎الله nous a donné un signe tellement distinct qu'on ne peut l'ignorer idem pour les autres fois c'était toujours des signes de Dieu pour nous dire que nous sommes fait pour rester ensemble</p>
+      <button class="suite" onclick="showScene5()">Suite ➡️</button>
     </div>
   `;
 }
 
-/* BOUTON NON */
+/* ===== SCENE 5 ENFANTS ===== */
+function showScene5(){
+  scene.innerHTML=`
+    <img src="IMG_3948.jpeg" style="width:100%;border-radius:15px;">
+    <h2>Les enfants</h2>
+    <button class="yes" onclick="scene5Oui()">Oui ❤️</button>
+    <button class="no" onmouseover="moveNo(this)">Non 💔</button>
+  `;
+}
+
+function scene5Oui(){
+  scene.innerHTML=`
+    <div style="color:white;height:100vh;background:url('IMG_3948.jpeg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background-color:rgba(0,0,0,0.6);background-blend-mode:darken;">
+      <p>Une journée inattendue honnêtement… je ne pensais pas que t’allais rencontrer ma nièce et mon neveu de suite avec les problèmes de mon frère mais si je l’ai fait c’est parce que j’en avais réellement envie et surtout parce que je sais que t’es la bonne. Sur cette vidéo que j’ai transformé en photo tu parlais avec la petite et tu lui disais « Et là c’est qui ? C’est tata Chaimaa » même sur cette vidéo on voyait que tu étais déjà intégré en tant que tata pour elle, elle t’a tout de suite accepté et elle n’a jamais été aussi sage depuis que je la connais car t’as su y faire avec elle mais surtout parce que même les enfants t’ont acceptés dans notre famille. T’es leur tata chaimaa à jamais et ils auront des cousins cousines venant de toi et personne d’autre</p>
+      <button class="suite" onclick="showScene6()">Suite ➡️</button>
+    </div>
+  `;
+}
+
+/* ===== SCENE 6 ===== */
+function showScene6(){
+  scene.innerHTML=`
+    <img src="IMG_1992.jpeg" style="width:100%;border-radius:15px;">
+    <h2>Journée mémorable et symbolique</h2>
+    <button class="yes" onclick="scene6Oui()">Oui ❤️</button>
+    <button class="no" onmouseover="moveNo(this)">Non 💔</button>
+  `;
+}
+
+function scene6Oui(){
+  scene.innerHTML=`
+    <div style="color:white;height:100vh;background:url('IMG_1992.jpeg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background-color:rgba(0,0,0,0.6);background-blend-mode:darken;">
+      <p>Ce jour là j’étais tellement reconnaissant que t’ai accepté de m’accompagner alors qu’il y avait ma mère t’aurais pu refuser et au final t’as accepté ce qui montre l’importance que j’ai à tes yeux. C’était tellement magique de pouvoir vivre cette journée tous les trois tu n’as pas idée et j’espère vivre cette même soirée durant ta remise. Ça a été une journée hyper symbolique, tu as rencontré ma mère, la première et dernière fille qui la rencontrera. Tout s’est bien passé entre vous Al hamdoulillah et tu continueras à la voir parce que je ne te lâcherai pas, tu es ma femme, ma moitié, mon tout</p>
+      <button class="suite" onclick="showScene7()">Suite ➡️</button>
+    </div>
+  `;
+}
+
+/* ===== SCENE 7 FINAL ===== */
+function showScene7(){
+  scene.innerHTML=`
+    <img src="IMG_8560.jpeg" style="width:100%;border-radius:15px;">
+    <h2>Pour finir</h2>
+    <button class="yes" onclick="scene7Oui()">Déclaration ❤️</button>
+  `;
+}
+
+function scene7Oui(){
+  scene.innerHTML=`
+    <div style="color:white;height:100vh;background:url('IMG_8560.jpeg') center/cover no-repeat;display:flex;justify-content:center;align-items:center;text-align:center;background-color:rgba(0,0,0,0.7);background-blend-mode:darken;">
+      <p>Ma chérie, je demanderai la main à ton père très prochainement il est hors de question qu’un autre homme mette les mains sur toi ou prenne ma place devant ‎الله et à la mairie. Je t’en fais la promesse que tu ne manqueras de rien et que tu n’auras pas de doute à mon égard, je te prouverai jour après jour l’amour que j’ai pour toi et en aucun cas tu te poseras des questions. Chaque fois qu’on se parle je le prends en considération</p>
+    </div>
+  `;
+}
+
+/* NON QUI FUIT */
 function moveNo(btn){
   btn.style.transform=`translate(${Math.random()*120-60}px,${Math.random()*80-40}px)`;
 }
