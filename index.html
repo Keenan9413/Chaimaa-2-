@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pour Chaimaa ❤️</title>
+<title>Mon amoureuse ❤️</title>
 
 <style>
 body{
@@ -16,6 +16,11 @@ body{
   font-family:Arial,sans-serif;
   overflow:hidden;
   transition:background 1s ease;
+}
+
+/* ===== FOND QUESTIONS ===== */
+body.questions-bg{
+  background:url("IMG_1785.jpeg") center/cover no-repeat;
 }
 
 /* ===== TITRE ===== */
@@ -64,6 +69,11 @@ body{
 }
 
 /* ===== QUESTIONS ===== */
+#question{
+  position:fixed;
+  bottom:25px;
+}
+
 button{
   padding:12px 22px;
   border:none;
@@ -271,6 +281,7 @@ window.onload=()=>intro.style.display="block";
 function openIntro(){
   intro.style.display="none";
   question.style.display="block";
+  document.body.classList.add("questions-bg");
 }
 
 function spawnQuestionEmoji(){
@@ -291,6 +302,7 @@ function nextQuestion(){
       qText.innerText=questions[q];
     }else{
       question.style.display="none";
+      title.style.display="none";
       startHack();
     }
   },800);
@@ -307,7 +319,7 @@ function spawnHackChaos(){
 }
 
 function startHack(){
-  title.style.display="none";
+  document.body.classList.remove("questions-bg");
   hack.style.display="block";
   chaos=setInterval(spawnHackChaos,70);
 
