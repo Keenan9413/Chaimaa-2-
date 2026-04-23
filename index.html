@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mon amoureuse ❤️</title>
+<title> Mon amoureuse ❤️</title>
 
 <style>
 body{
@@ -17,6 +17,7 @@ body{
   overflow:hidden;
 }
 
+/* ===== TITRE (FIX UNE LIGNE) ===== */
 #title{
   position:fixed;
   top:95px;
@@ -27,8 +28,32 @@ body{
   color:#c00000;
   text-decoration:underline;
   z-index:20;
+  white-space:nowrap; /* ✅ force une seule ligne */
 }
 
+/* ===== COEURS ===== */
+.heart{
+  position:fixed;
+  color:red;
+  font-size:20px;
+  animation:floatHeart 5s linear forwards;
+  pointer-events:none;
+  z-index:1;
+}
+
+@keyframes floatHeart{
+  from{
+    transform:translateY(50px) scale(0.8);
+    opacity:0;
+  }
+  20%{opacity:1;}
+  to{
+    transform:translateY(-120px) scale(1.2);
+    opacity:0;
+  }
+}
+
+/* CARTE */
 .card{
   display:none;
   background:white;
@@ -38,8 +63,10 @@ body{
   max-width:360px;
   text-align:center;
   box-shadow:0 10px 30px rgba(0,0,0,.3);
+  z-index:5;
 }
 
+/* ENVELOPPE */
 .envelope{
   width:200px;
   cursor:pointer;
@@ -49,6 +76,7 @@ body{
   50%{transform:translateY(-10px);}
 }
 
+/* BOUTONS */
 button{
   padding:12px 22px;
   border:none;
@@ -77,11 +105,37 @@ button{
 
 <script>
 
-window.onload=()=>intro.style.display="block";
+window.onload=()=>{
+  intro.style.display="block";
+  startHearts(); // ❤️ démarre les cœurs
+};
 
+/* ===== COEURS QUI SPAWN ===== */
+let heartInterval;
+
+function spawnHeart(){
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.top=Math.random()*100+"vh";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),5000);
+}
+
+function startHearts(){
+  heartInterval=setInterval(spawnHeart,300);
+}
+
+function stopHearts(){
+  clearInterval(heartInterval);
+}
+
+/* ===== START ===== */
 function start(){
   intro.style.display="none";
   title.style.display="none";
+  stopHearts(); // ❌ stop les cœurs après début
   showScene1();
 }
 
@@ -99,7 +153,7 @@ function showScene1(){
 function scene1Oui(){
   scene.innerHTML=`
     <div style="color:white;height:100vh;background:url('IMG_3018.jpeg') center/cover no-repeat;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background-color:rgba(0,0,0,0.5);background-blend-mode:darken;">
-      <p>Je t’avais donné rendez-vous pour faire de la grande roue, t’en avais jamais fait ensuite on est allé au musée et ce jour là je m'en souviens t'étais fatigué et t'en avais marre d'être debout. Cette journée était vraiment cool beauté</p>
+      <p>Je t’avais donné rendez-vous pour faire de la grande roue, t’en avais jamais fait ensuite on est allé au musée et ce jour là je m'en souviens t'étais fatigué et t'en avais marre d'être debout. Cette journée était vraiment cool beauté </p>
       <button class="suite" onclick="showScene2()">Suite ➡️</button>
     </div>
   `;
